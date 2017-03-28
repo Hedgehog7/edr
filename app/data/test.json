@@ -1,0 +1,8 @@
+{
+    "type": "Person",
+    "data": {
+        "name": "Ivan",
+        "surname": "Zagoskin",
+        "age": 21
+    }
+}
