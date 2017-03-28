@@ -1,0 +1,28 @@
+<!--<default-form></default-form>-->
+<div class="korpus">
+  <input type="radio" name="odin" checked="checked" id="vkl1"/>
+  <label for="vkl1">Student list</label>
+
+  <input type="radio" name="odin" id="vkl2"/>
+  <label for="vkl2">Person list</label>
+
+  <input type="radio" name="odin" id="vkl3"/>
+  <label for="vkl3">Tutors list</label>
+  
+  <input type="radio" name="odin" id="vkl4"/>
+  <label for="vkl4">Universal list</label>
+
+
+  <div>
+    <student-list [students]="students"></student-list>
+  </div>
+  <div>
+    <universal-list [entityArray]="persons"></universal-list>
+  </div>
+  <div>
+    <universal-list [entityArray]="tutors"></universal-list>
+  </div>
+  <div>
+    <universal-list [entityArray]="variousTypes"></universal-list>
+  </div>
+</div>

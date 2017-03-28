@@ -1,0 +1,47 @@
+input.ng-touched.ng-invalid {border:solid red 2px;}
+input.ng-touched.ng-valid {border:solid green 2px;}
+
+.btn {
+    border: black solid 1px;
+}
+
+.btn:disabled {
+    border: white;
+}
+
+.btn:active {
+    border-color: tomato;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    border-top: 1px solid black;
+    width: 100%;
+    max-height: 400;   
+    overflow-y: scroll;
+    
+}
+
+th {
+    height: 50px;
+    text-align: left;
+    background-color: forestgreen;
+    color: white;
+}
+
+td {
+    height: 50px;
+    vertical-align: middle;
+}
+
+tr:hover{background-color: #f5f5f5}
+
+tr:nth-child(even) {background-color: #f2f2f2}
+
+th, td {
+    padding: 15px;
+    text-align: auto;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}

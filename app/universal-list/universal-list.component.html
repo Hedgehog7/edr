@@ -1,0 +1,34 @@
+<div *ngIf="entityArray.length" >
+    <div *ngFor="let entity of entityArray" class="entities" >
+        <div class="entity">
+            <span class="title"> {{ 1 + entityArray.indexOf(entity) +')' }} </span>
+            <ng-container *ngFor="let atribute of entity.getAtributesNames()">
+                <span class="title" *ngIf="entity.getAtributesNames().indexOf(atribute)<3">{{ '_' + entity[atribute] }}</span>
+            </ng-container>
+
+            <div class="actions">
+                <button class="detail-icon" (click)="viewdiv(idList + entityArray.indexOf(entity));">
+                    <i class="material-icons">person</i>
+                </button>
+                <button class="edit-icon" (click)="viewdiv('edit' + idList + entityArray.indexOf(entity));">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button class="delete-icon" (click)="delete(entity)">
+                    <i class="material-icons">delete</i>
+                </button>
+            </div>
+        </div>
+        <!--<default-form id='{{idList + "edit" + entityArray.indexOf(entity)}}' class="entity-detail" [entity]="entity" [editMode]="true"></default-form>
+        <resolver id='{{idList + entityArray.indexOf(entity)}}' class="entity-detail" [entity]="entity"></resolver>-->
+        <!--<student id='{{"edit" + student.personalNumber}}' class="student-detail" [editMode]="true" [student]="student"></student>-->
+    </div>
+</div>
+
+<a class="overlay2" id="{{'' + idList + 'win2' }}"></a>
+<div class="popup2" id="{{'' + idList + 'popup2' }}">
+    <button class="closePopup" (click)="closePopup()">Закрыть</button>
+    <div *ngFor="let entity of entityArray" class="entities" >
+        <default-form id='{{"edit" + idList + entityArray.indexOf(entity)}}' class="entity-detail" [entity]="entity" [editMode]="true"></default-form>
+        <resolver id='{{idList + entityArray.indexOf(entity)}}' class="entity-detail" [entity]="entity"></resolver>
+    </div>
+</div>

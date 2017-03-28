@@ -1,0 +1,50 @@
+<button class="btn" type="submit" (click)="viewdiv('add-new');updateNewStudent();">Новый студент</button>
+
+<div *ngIf="students.length" >
+    <div *ngFor="let student of students" class="students" >
+        <div class="student">
+            <span class="title">
+                {{ student.name + ' ' + student.surname.charAt(0) + '.' + student.patronymic.charAt(0) + '.,' }}
+                {{ student.studentGroup }}
+            </span>
+            <div class="actions">
+                <button class="detail-icon" (click)="viewdiv(student.personalNumber);">
+                <!--<a href="#win2" class="settings2">-->
+                    <i class="material-icons">person</i>
+                <!--</a>
+                <a href="#y" class="overlay2" id="win2"></a>-->
+                </button>
+                <button class="edit-icon" (click)="viewdiv('edit' + student.personalNumber);">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button class="delete-icon" (click)="delete(student)">
+                    <i class="material-icons">delete</i>
+                </button>
+            </div>
+        </div>
+        <!--<default-form id='{{"edit" + student.personalNumber}}' class="student-detail" [entity]="student" [editMode]="true"></default-form>-->
+        <!--<resolver id='{{student.personalNumber}}' class="student-detail" [entity]="student"></resolver>-->
+        <!--<div class="popup2">
+            <resolver id='{{student.personalNumber}}' class="student-detail" [entity]="student"></resolver>
+            <a class="close2" title="Закрыть" href="#close2"></a>
+        </div>-->
+        
+        <!--<student id='{{"edit" + student.personalNumber}}' class="student-detail" [editMode]="true" [student]="student"></student>-->
+    </div>
+    <!--<resolver *ngFor="let student of students" id='{{student.personalNumber}}' class="student-detail" [entity]="student"></resolver>-->
+</div>
+        
+    
+
+
+<a class="overlay2" id="win2"></a>
+<div class="popup2" id="popup2">
+    <button class="closePopup" (click)="closePopup()">Закрыть</button>
+    <resolver *ngFor="let student of students" id='{{student.personalNumber}}' class="student-detail" [entity]="student"></resolver>
+    <default-form *ngFor="let student of students" id='{{"edit" + student.personalNumber}}' class="student-detail" [entity]="student" [editMode]="true"></default-form>
+    <!---->
+    <div id="add-new" class="add-new">
+        <student [editMode]="true" [student]="newStudent"></student>
+    </div>
+    
+</div>

@@ -1,0 +1,38 @@
+.FIO {
+    display: flex;
+    flex-direction: row;
+    border-bottom: lightgray solid 1px; 
+    justify-content: flex-start;
+    font-style: italic;
+}
+
+.subInfo {
+    font-size: 14px;
+    color: black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nameShow {
+    font-size: 16px;
+    color: black;
+    padding: 5px;
+}
+
+input.ng-touched.ng-invalid {border:solid red 2px;}
+input.ng-touched.ng-valid {border:solid green 2px;}
+
+.title {
+    display: flex;
+    color: darkblue;
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: flex-start;
+    padding: 5px;
+    /*border-bottom: 1px solid darkgrey;*/
+}
+
+.input-div {
+    padding: 5px;
+}

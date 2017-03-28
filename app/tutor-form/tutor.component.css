@@ -1,0 +1,38 @@
+.tutor-entity {
+    font-size: 20px;
+    color: forestgreen;
+    font-weight: bold;
+    padding: 5px;
+    border-bottom: lightgray solid 1px;
+}
+
+.main-info {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    font-style: italic;
+    border-bottom: lightgray solid 1px;
+}
+
+.name-tutor {
+    padding: 5px;
+    color: black;
+    font-size: 14px;
+}
+
+.since-degree {
+    font-size: 14px;
+    padding: 5px;
+    color: black;
+}
+
+.sub {
+    font-size: 14px;
+    color: black;
+    padding: 5px;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+}

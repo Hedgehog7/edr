@@ -1,0 +1,50 @@
+<div class="student-form">
+    <div *ngIf="editMode==false">
+        <div>
+            <span class="title">STUDENT</span>
+        </div>
+        <div class="FIO"> 
+            <span class="nameShow">{{ student.name }}</span>
+            <span class="nameShow">{{ student.surname }}</span>
+            <span class="nameShow">{{ student.patronymic }}</span>
+        </div>
+        <div class="subInfo">
+            <span class="age">Номер зачётной книжки: {{ student.personalNumber }}</span>
+            <span class="numberDepartment">Кафедра: {{ student.numberDepartment }}</span>
+            <span class="age">Возраст: {{ student.age }}</span>
+            <span class="studentGroup">Группа: {{ student.studentGroup }}</span>
+        </div>
+    </div>
+    <div class="container" *ngIf="editMode==true">
+        <form #f="ngForm">
+            <div class="input-div">
+                <input name="name" placeholder="Укажите имя"  [(ngModel)]="student.name" 
+                        class="name" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="surname" placeholder="Укажите фамилию"  [(ngModel)]="student.surname"
+                        class="surname" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="patronymic" placeholder="Укажите отчество"  [(ngModel)]="student.patronymic" 
+                class="patronymic" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="personalNumber" placeholder="Укажите номер зачётки"  [(ngModel)]="student.personalNumber" 
+                class="personalNumber" type="number" required/>
+            </div>
+            <div class="input-div">
+                <input name="numberDepartment" placeholder="Укажите номер кафедры"  [(ngModel)]="student.numberDepartment" 
+                class="numberDepartment" type="number" required />
+            </div>
+            <div class="input-div">
+                <input name="studentGroup" placeholder="Укажите номер группы"  [(ngModel)]="student.studentGroup"
+                 class="studentGroup" required pattern="([A-Za-zА-Яа-яЁё])([0-9]{2})(-)([0-9]{3})"/>
+            </div>
+            <div class="input-div">
+                <input name="age"placeholder="Укажите возраст"  [(ngModel)]="student.age" class="age" type="number" required />
+            </div>
+            <button [disabled]="f.invalid" class="btn" (click)="addNewStudent()">Добавить</button>
+        </form>
+    </div>
+</div>

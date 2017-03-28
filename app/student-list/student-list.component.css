@@ -1,0 +1,170 @@
+.title {
+    /*color: black;*/
+    font-style: italic;
+}
+
+.add-new {
+    display: none;
+}
+.students {
+    display: flex;
+    flex-direction: column;
+}
+
+.student {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.student-detail {
+    padding: 1em;
+    display: none;
+}
+
+
+.student .actions {
+    margin-left: auto;
+    opacity: 0;
+    transition: all .2s;
+    flex-wrap: wrap;
+}
+
+.student:hover .actions {
+    opacity: 1;
+}
+
+button {
+    background: 0 0;
+    border: none;
+    border-radius: 2px;
+    color: #757575;
+    position: relative;
+    height: 36px;
+    margin: 0;
+    min-width: 64px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 36px;
+    vertical-align: middle;
+}
+
+button.icon {
+    border-radius: 50%;
+    font-size: 24px;
+    height: 32px;
+    margin-left: 0;
+    margin-right: 0;
+    min-width: 32px;
+    width: 32px;
+    padding: 0;
+    overflow: hidden;
+    line-height: normal;
+}
+
+button.icon .material-icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-12px,-12px);
+    transform: translate(-12px,-12px);
+    line-height: 24px;
+    width: 24px;
+    vertical-align: middle;
+}
+
+button[disabled] {
+    color: rgba(0,0,0,.26);
+    cursor: default;
+    background-color: transparent;
+}
+
+/* кнопки */
+.btn {
+    background: #fff;
+    border: black solid 1px;
+    font-size: 14px;
+    text-align: center;
+    min-width: 60px;
+    position: relative;
+}
+
+.btn:disabled {
+    border: white;
+}
+
+.btn:hover {
+    background: #f2f2f2;
+}
+
+.btn:active {
+    border-color: tomato;
+}
+
+
+.detail-icon:hover,
+.edit-icon:hover,
+.delete-icon:hover {
+    color: tomato;
+}
+
+.overlay2 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+/* фон затемнения */
+    background-color: rgba(0, 0, 0, 0.65);
+    position: fixed;  /*фиксированное поцизионирование*/ 
+    cursor: default;  /*тип курсора*/ 
+}
+/* активируем слой затемнения */
+.overlay2:target {
+    /*display: block;*/
+}
+/* стили модального окна */
+.popup2 {
+    top: -100%;
+    right: 0;
+    left: 50%;
+    font-size: 14px;
+    z-index: 20;
+    margin: 0;
+    width: 85%;
+    min-width: 200px;
+    max-width: 600px;
+    display: none;
+    position: fixed;
+    padding: 15px;
+    border: 1px solid #383838;
+    background: #fefefe;
+    max-height: 400px;
+    overflow-y: scroll;
+    border-radius: 4px;
+    font: 14px/18px 'Tahoma', Arial, sans-serif;
+}
+/* активируем модальный блок */
+.overlay2:target+.popup2 {
+    /*-webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: 20%;
+    display: block;*/
+}

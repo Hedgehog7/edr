@@ -1,0 +1,14 @@
+<div>
+    <div *ngIf="entity.getComponentNameOfType() == 'default'">
+        <default-form [entity]="entity"></default-form>
+    </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'PersonComponent'">
+        <person [person]="entity"></person>
+    </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'StudentComponent'">
+        <student [student]="entity"></student>
+    </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'TutorComponent'">
+        <tutor [tutor]="entity"></tutor>
+    </div>
+</div>

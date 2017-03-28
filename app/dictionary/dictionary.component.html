@@ -1,0 +1,25 @@
+<div>
+    <table id="myTable" class="dictionary" >
+        <caption></caption>
+        <tr>
+            <th>Entity</th>
+            <th>Component</th>
+        </tr>
+        <tr *ngFor="let record of exampleDictionary.getRecords()">
+            <td>{{ record.nameEntity }}</td>
+            <td>
+                <div>
+                    {{ record.nameComponent }}
+                    <button class="delete-icon" (click)="delete(record)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="form-input">
+        <input name="nameEntity" placeholder="Имя типа"  [(ngModel)]="newRecord.nameEntity" required />
+        <input name="nameComponent" placeholder="Имя компонента"  [(ngModel)]="newRecord.nameComponent" required />
+        <input type="button" class="button-add" value="Добавить" (click)="addNewRecord(newRecord);"/>
+    </div>
+</div>
