@@ -3,6 +3,11 @@ import { EntityType } from '../test/entity';
 import { Dictionary, RecordDictionary } from './dictionary';
 import { Person } from '../data/persons';
 import { Student } from '../data/students';
+import { Group } from '..data/group';
+
+
+export const GROUPS: Group[] = [];
+GROUPS.push(new Group('Б13-507', 2012, 'Программная инжененрия'));
 
 export const STUDENTS: Student[] = [];
 STUDENTS.push(new Student('Petr','Petrov','Petrovich', 100000, 22, 'B13-508', 19));
