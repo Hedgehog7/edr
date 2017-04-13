@@ -1,5 +1,4 @@
 import { EntityType } from '../test/entity';
-import { Person } from '../data/persons';
 
 export class Group extends EntityType {
     
