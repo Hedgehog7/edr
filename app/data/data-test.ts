@@ -3,7 +3,7 @@ import { EntityType } from '../test/entity';
 import { Dictionary, RecordDictionary } from './dictionary';
 import { Person } from '../data/persons';
 import { Student } from '../data/students';
-import { Group } from '..data/group';
+import { Group } from '../data/group';
 
 
 export const GROUPS: Group[] = [];
