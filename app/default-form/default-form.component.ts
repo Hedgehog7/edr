@@ -3,6 +3,7 @@ import { EntityType } from '../test/entity';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 // import { SOMEPERSONS } from '../data/data-test';
+import { incrId } from '../data/id-incr';
 
 @Component({
     moduleId: module.id,
@@ -13,6 +14,7 @@ import { NgForm } from '@angular/forms';
 export class DefaultFormComponent {
     @Input() entity: EntityType;
     @Input() editMode: boolean = false;
+    idObj: string = incrId().toString();
 
     submit(form: NgForm){
         // console.log(form['atribute0']);
@@ -30,5 +32,17 @@ export class DefaultFormComponent {
 
     saveEntity(model: EntityType, valid: boolean) {
 
+    }
+
+    openTab(id: string) {
+        // var alltabs = document.getElementsByClassName('entity_attr');
+        // console.log('HI' + ' ' + id);
+        // for(let i = 0; i < alltabs.length; i++) {
+        //     alltabs[i].style.display = 'none';
+        // }
+        var tab = document.getElementById(id);
+        console.log(tab);
+
+        tab.style.display = tab.style.display == "block" ? "none": "block";
     }
 }

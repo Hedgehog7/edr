@@ -86,3 +86,11 @@ th, td {
     background-color: forestgreen;
     color: white;
 }
+
+/* Динамические вкладки для типов-сущностей */
+.entity_attr {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}

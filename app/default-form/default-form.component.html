@@ -1,21 +1,6 @@
 <section *ngIf="entity.getAtributesNames().length > 0">
+    <!-- Режим просмотра -->
     <div *ngIf="editMode==false">
-       <!--
-	   <table border="1">
-            <caption>Универсальная форма({{entity.nameEntity}})</caption>
-            <tr>
-                <th>Имя атрибута</th>
-                <th>Значение</th>
-                <th>Тип</th>
-            </tr>
-            <tr *ngFor="let atribute of entity.getAtributesNames()">
-                <td><div>{{atribute}}</div></td>
-                <td><div>{{entity[atribute]}}</div></td>
-                <td><div>{{entity.getNameType(entity[atribute])}}</div></td>
-            </tr>
-        </table>
-		-->
-			
 		<div class="table">	
 			<caption>Универсальная форма({{entity.nameEntity}})</caption>
 			<div class="header">
@@ -28,67 +13,61 @@
     </div>
     <!-- Режим редактирования -->
     <div *ngIf="editMode==true">
-        <!--<form #f="ngForm" (ngSubmit)="save(f.value, f.valid)" novalidate>-->
-            <form #myForm="ngForm" novalidate>
-				
-				<!--
-                <table border="1">
-                    <caption>Универсальная форма({{entity.nameEntity}})</caption>
-                    <tr>
-                        <th>Имя атрибута</th>
-                        <th>Значение</th>
-                        <th>Тип</th>
-                    </tr>
-                    <tr *ngFor="let atribute of entity.getAtributesNames()">
-                        <td><div>{{atribute}}</div></td>
-                        <td>
-                            <div>
-                                <input *ngIf="entity.getNameType(entity[atribute]) == 'String' && atribute != 'studentGroup'" 
-                                        type="text" name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}"
-                                        [ngModel]="entity[atribute]"
-                                        class="name" ngModel
-                                        pattern="[A-Za-zА-Яа-яЁё]+" required>
-                                <input *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
-                                        name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}" ngModel
-                                        type="number" [ngModel]="entity[atribute]" class="name" required/>
-                                <input *ngIf="atribute == 'studentGroup'"
-                                        name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}" 
-                                        type="text" [ngModel]="entity[atribute]" class="name" ngModel
-                                        pattern="([A-Za-zА-Яа-яЁё])([0-9]{2})(-)([0-9]{3})" required/>
-                            </div>
-                        </td>
-                        <td><div>{{entity.getNameType(entity[atribute])}}</div></td>
-                    </tr>
-                </table>
-				-->
-				
-				<div class="table">
-					<caption>Универсальная форма({{entity.nameEntity}})</caption>
-					<div class="header">
-						<div class="col">Имя атрибута</div><div class="col">Значение</div><div class="col">Тип</div>
-					</div>
-					<div class="row" *ngFor="let atribute of entity.getAtributesNames()">
-						<div class="col">{{atribute}}</div>
-						<div class="col">
-							<input *ngIf="entity.getNameType(entity[atribute]) == 'String' && atribute != 'studentGroup'" 
-                                        type="text" name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}"
-                                        [ngModel]="entity[atribute]"
-                                        class="name" ngModel
-                                        pattern="[A-Za-zА-Яа-яЁё]+" required>
-                                <input *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
-                                        name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}" ngModel
-                                        type="number" [ngModel]="entity[atribute]" class="name" required/>
-                                <input *ngIf="atribute == 'studentGroup'"
-                                        name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}" 
-                                        type="text" [ngModel]="entity[atribute]" class="name" ngModel
-                                        pattern="([A-Za-zА-Яа-яЁё])([0-9]{2})(-)([0-9]{3})" required/>
-						</div>
-						<div class="col">{{entity.getNameType(entity[atribute])}}</div>
-					</div>
-				</div>
-				
-                <button [disabled]="myForm.invalid" class="btn" (click)="submit(myForm)">Сохранить</button>
-            </form>
-        <!--</form>-->
+        <form #myForm="ngForm" novalidate>            
+            <div class="table">
+                <caption>Универсальная форма({{entity.nameEntity}})</caption>
+                <div class="header">
+                    <div class="col">Имя атрибута</div><div class="col">Значение</div><div class="col">Тип</div>
+                </div>
+                <div class="row" *ngFor="let atribute of entity.getAtributesNames()">
+                    <div *ngIf = "entity.getNameType(entity[atribute]) == 'String' ||
+                                  entity.getNameType(entity[atribute]) == 'Number' ||
+                                  entity.getNameType(entity[atribute]) == 'Boolean' ||
+                                  entity.getNameType(entity[atribute]) == 'null or undefined'"
+                                  class="col">{{atribute}}</div>
+                    <div *ngIf = "entity.getNameType(entity[atribute]) == 'String' ||
+                                  entity.getNameType(entity[atribute]) == 'Number' ||
+                                  entity.getNameType(entity[atribute]) == 'Boolean' ||
+                                  entity.getNameType(entity[atribute]) == 'null or undefined'"
+                                  class="col">
+                        <input *ngIf="entity.getNameType(entity[atribute]) == 'String' && atribute != 'studentGroup'" 
+                                    type="text" name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}"
+                                    [ngModel]="entity[atribute]"
+                                    class="name" ngModel
+                                    pattern="[A-Za-zА-Яа-яЁё]+" required>
+                        <input *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
+                                name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}" ngModel
+                                type="number" [ngModel]="entity[atribute]" class="name" required/>
+                    </div>
+                    <div *ngIf = "entity.getNameType(entity[atribute]) == 'String' ||
+                                  entity.getNameType(entity[atribute]) == 'Number' ||
+                                  entity.getNameType(entity[atribute]) == 'Boolean' ||
+                                  entity.getNameType(entity[atribute]) == 'null or undefined'" class="col">
+                        {{entity.getNameType(entity[atribute])}}
+                    </div>
+                </div>
+            </div>            
+            <button [disabled]="myForm.invalid" class="btn" (click)="submit(myForm)">Сохранить</button>
+            
+            <div class="tab" *ngFor="let atribute of entity.getAtributesNames()" >
+                <button *ngIf = "entity.getNameType(entity[atribute]) != 'String' &&
+                                   entity.getNameType(entity[atribute]) != 'Number' &&
+                                   entity.getNameType(entity[atribute]) != 'Boolean' &&
+                                   entity.getNameType(entity[atribute]) != 'null or undefined'" 
+                        class="tablinks" (click)="openTab(idObj + atribute)" >{{atribute}}</button>
+            </div>
+
+            <!-- Отображения сложных типов -->
+            <div id = "{{idObj + atribute}}" class="entity_attr" *ngFor="let atribute of entity.getAtributesNames()">
+                <resolver *ngIf = "entity.getNameType(entity[atribute]) != 'String' &&
+                                   entity.getNameType(entity[atribute]) != 'Number' &&
+                                   entity.getNameType(entity[atribute]) != 'Boolean' &&
+                                   entity.getNameType(entity[atribute]) != 'null or undefined'" 
+                          [entity]="entity[atribute]"></resolver>
+            </div>
+
+        </form>
     </div>
+
+    
 </section>
