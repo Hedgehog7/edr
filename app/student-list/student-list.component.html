@@ -5,7 +5,7 @@
         <div class="student">
             <span class="title">
                 {{ student.name + ' ' + student.surname.charAt(0) + '.' + student.patronymic.charAt(0) + '.,' }}
-                {{ student.studentGroup }}
+                {{ student.studentGroup.name }}
             </span>
             <div class="actions">
                 <button class="detail-icon" (click)="viewdiv(student.personalNumber);">
