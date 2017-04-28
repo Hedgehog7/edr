@@ -1,7 +1,8 @@
 (function (global) {
     System.config({
         paths: {
-            'npm:': 'node_modules/'
+            'npm:': 'node_modules/',
+            'tether': 'node_modules/tether/dist/js/tether.min.js'
         },
         map: {
             app: 'app',
@@ -15,9 +16,11 @@
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             
+            'components': '../jqwidgets-ts/',
+
             'reflect-metadata': 'npm:reflect-metadata/Reflect.js',
             'rxjs': 'npm:rxjs',
-            
+            'ng-lightning/ng-lightning': 'https://unpkg.com/ng-lightning@1.3.0/bundles/ng-lightning.umd.js'
         },
         packages: {
             app: {

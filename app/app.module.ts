@@ -25,6 +25,10 @@ import { TutorComponent } from './tutor-form/tutor.component';
 import { TestSimpleType } from './test-c/test-c.component';
 
 import { DataService } from './services/data.service';
+
+import { NglModule } from 'ng-lightning/ng-lightning';
+
+import { DemoDatatables } from './datatable/datatable.component';
 /* 
     @NgModule() - декоратор указывающий, что это основной модуль приложения
     p.s.: Добавление метаинформации
@@ -35,7 +39,7 @@ import { DataService } from './services/data.service';
 /*
     imports указывется, что модуль импоритрует
 */
-    imports: [BrowserModule, FormsModule],
+    imports: [BrowserModule, FormsModule, NglModule.forRoot()],
     /**
      * Регистрируем компонент в основном модуле
      */
@@ -51,7 +55,8 @@ import { DataService } from './services/data.service';
         DictionaryComponent,
         UniversalListComponent,
         TutorComponent,
-        TestSimpleType
+        TestSimpleType,
+        DemoDatatables
     ],
     providers: [DataService],
     /**

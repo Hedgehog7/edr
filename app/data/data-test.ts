@@ -4,7 +4,13 @@ import { Dictionary, RecordDictionary } from './dictionary';
 import { Person } from '../data/persons';
 import { Student } from '../data/students';
 import { Group } from '../data/group';
+import { Discipline } from '../data/discipline';
 
+
+export const DISCIPLINES: Discipline[] = [];
+DISCIPLINES.push(new Discipline('Mathematical analysis','Math.an.'));
+DISCIPLINES.push(new Discipline('Linear algebra','Lin.al.'));
+DISCIPLINES.push(new Discipline('Physics','Physics'));
 
 export const GROUPS: Group[] = [];
 const testGroup: Group = new Group('Б13-507', 2012, 'Программная инжененрия');
@@ -14,9 +20,9 @@ export const STUDENTS: Student[] = [];
 STUDENTS.push(new Student('Petr','Petrov','Petrovich', 100000, 22, testGroup, 19));
 STUDENTS.push(new Student('Ivan','Ivanov','Ivanovich', 200000, 21, testGroup, 18));
 STUDENTS.push(new Student('Victor','Victorov','Victorovich', 300000, 31, testGroup, 18));
-STUDENTS.push(new Student('Vladimir','Vladimirov','Vladimirovich', 400000, 44, testGroup, 20));
-STUDENTS.push(new Student('Denis','Denisov','Denisovic', 500000, 27, testGroup, 21));
-STUDENTS.push(new Student('Semen','Semenov','Semenovich', 600000, 32, testGroup, 19));
+STUDENTS.push(new Student('Vladimir','Vladimirov','Vladimirovich', 400000, 44, testGroup, 20, ));
+STUDENTS.push(new Student('Denis','Denisov','Denisovic', 500000, 27, testGroup, 21, ));
+STUDENTS.push(new Student('Semen','Semenov','Semenovich', 600000, 32, testGroup, 19, ));
 
 export const SOMEPERSONS: Person[] = [];
 SOMEPERSONS.push(new Person('Bob','White', 23));

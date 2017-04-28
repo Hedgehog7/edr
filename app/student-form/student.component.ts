@@ -18,6 +18,6 @@ export class StudentComponent {
 
     addNewStudent() {
         this.dataService.addNewStudent(this.student);
-        this.student = new Student(null,null,null,null,null,null, null);
+        this.student = new Student(null,null,null,null,null,null, null, );
     }
 }
