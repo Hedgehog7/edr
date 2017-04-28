@@ -17,7 +17,10 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             
             'components': '../jqwidgets-ts/',
-
+            'devextreme-angular': 'npm:devextreme-angular',
+            'devextreme': 'npm:devextreme',                   // <== add this line
+            'jquery': 'npm:jquery/dist/jquery.min.js',        // <== add this line
+            'jszip': 'npm:jszip/dist/jszip.min.js',           // <== add this line
             'reflect-metadata': 'npm:reflect-metadata/Reflect.js',
             'rxjs': 'npm:rxjs',
             'ng-lightning/ng-lightning': 'https://unpkg.com/ng-lightning@1.3.0/bundles/ng-lightning.umd.js'
@@ -29,7 +32,9 @@
             },
             rxjs: {
                 defaultExtension: 'js'
-            }
+            },
+            'devextreme-angular':         { main: 'index.js', defaultExtension: 'js' }, // <== add this line
+            'devextreme':                 { defaultExtension: 'js' }                    // <== add this line
         }
     });
 })(this);

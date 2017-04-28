@@ -29,6 +29,10 @@ import { DataService } from './services/data.service';
 import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { DemoDatatables } from './datatable/datatable.component';
+
+import { DxDataGridModule } from 'devextreme-angular';
+
+import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
 /* 
     @NgModule() - декоратор указывающий, что это основной модуль приложения
     p.s.: Добавление метаинформации
@@ -39,7 +43,7 @@ import { DemoDatatables } from './datatable/datatable.component';
 /*
     imports указывется, что модуль импоритрует
 */
-    imports: [BrowserModule, FormsModule, NglModule.forRoot()],
+    imports: [BrowserModule, FormsModule, NglModule.forRoot(), DxDataGridModule],
     /**
      * Регистрируем компонент в основном модуле
      */
@@ -56,7 +60,8 @@ import { DemoDatatables } from './datatable/datatable.component';
         UniversalListComponent,
         TutorComponent,
         TestSimpleType,
-        DemoDatatables
+        DemoDatatables,
+        DevDataGrid
     ],
     providers: [DataService],
     /**
