@@ -14,7 +14,8 @@ export class Student extends Person {
                 public studentGroup: Group,
                 public age: number = 0,
                 public disciplines: Discipline[],
-                public olympiads: Olympiad[]
+                public olympiads: Olympiad[],
+                public something: number[]
                 ){
         super(name, surname, age);
     }

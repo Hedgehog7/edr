@@ -17,11 +17,11 @@ export class ListStudentComponent{
     constructor(private dataService: DataService) {}
 
     ngOnInit() {
-        this.newStudent = new Student(null,null,null,null,null,null,null, null, null);
+        this.newStudent = new Student(null,null,null,null,null,null,null, null, null, null);
     }
 
     updateNewStudent() {
-        this.newStudent = new Student(null,null,null,null,null,null,null, null, null);
+        this.newStudent = new Student(null,null,null,null,null,null,null, null, null, null);
     }
 
     delete(student: Student) {

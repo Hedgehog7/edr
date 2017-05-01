@@ -24,16 +24,42 @@ export class DefaultFormComponent implements OnInit{
     arrAtributesCollection: string[] = [];
     // столбцы для атрибутов-коллекций
     columnTabs: {[nameColumn: string] : string[]} = {};
+    // 
+    valueTabs: {[nameColumn: string] : any[]} = {};
 
     ngOnInit(){
+        // получить список аттрибутов-коллекций
         this.arrAtributesCollection = this.entity.getArrayAtribute();
+        
+        // для кажого атрибута-коллекции определяем его набор столбцов
+        // в соответствии с типом
         for(let attr of this.arrAtributesCollection) {
-            for(let propColl of this.entity[attr]) {
-                // console.log(propColl);
-                // console.log(Object.getOwnPropertyNames(propColl));
-                this.columnTabs[attr] = Object.getOwnPropertyNames(propColl);
+            // console.log(this.entity[attr]);
+            // console.log(Object.getOwnPropertyNames(this.entity[attr][0]));
+            if(this.entity.getNameType(this.entity[attr][0]) == ("Number" || "String" || "Boolean")) {
+                this.columnTabs[attr] = ["Value"];
+                let arr: any[] = [];
+                for(let elem of this.entity[attr])
+                    arr.push({"Value": elem});
+                this.valueTabs[attr] = arr;
+                // console.log(arr);
+            } else {
+                this.columnTabs[attr] = Object.getOwnPropertyNames(this.entity[attr][0]);
+                this.valueTabs[attr] = this.entity[attr];
             }
         }
+    }
+
+    getColumnTabs(tab: string) {
+        // if(this.entity.getNameType(this.entity[tab][0]) == ("Number" || "String" || "Boolean")) {
+        //     var values = [{}];
+        //     for(let elem of this.entity[tab]){
+        //         // values.push({"Value" : elem});
+        //     }
+        //     console.log(values);
+        //     return values;
+        // } else
+            return this.entity[tab];
     }
 
     getColumnForTab(tab: string): string[] {
@@ -50,18 +76,22 @@ export class DefaultFormComponent implements OnInit{
     }
 
     selectTab(e: any) {
-        console.log(e);
-        console.log(this.idObj + 'gridContainer' + e.itemData);
+        // console.log(e);
+        // console.log(this.idObj + 'gridContainer' + e.itemData);
         var tab = document.getElementById(this.idObj + 'gridContainer' + e.itemData);
-        for(let arr of this.arrAtributesCollection){
-            document.getElementById(this.idObj + 'gridContainer' + arr).style.display = "none";
+        if(tab.style.display == "block")
+            tab.style.display = "none";
+        else {
+            for(let arr of this.arrAtributesCollection){
+                document.getElementById(this.idObj + 'gridContainer' + arr).style.display = "none";
+            }
+            tab.style.display = "block";
         }
-        tab.style.display = tab.style.display == "block" ? "none": "block";
     }
 
     openTab(id: string) {
         var tab = document.getElementById(id);
-        console.log(tab);
+        // console.log(tab);
         tab.style.display = tab.style.display == "block" ? "none": "block";
     }
 

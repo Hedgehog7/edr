@@ -86,11 +86,22 @@
                 (onItemClick)=selectTab($event)
             ></dx-tabs>
         </div>
-        <dx-data-grid *ngFor="let tab of arrAtributesCollection"
+        <!--<dx-data-grid *ngFor="let tab of arrAtributesCollection"
                 id="{{idObj+'gridContainer'+tab}}"
-                [dataSource]="entity[tab]"
+                [dataSource]="valueTabs[tab]"
                 [columns]="columnTabs[tab]"
                 style="display:none">
+        </dx-data-grid>-->
+
+        <dx-data-grid *ngFor="let tab of arrAtributesCollection"
+                id="{{idObj+'gridContainer'+tab}}"
+                [dataSource]="valueTabs[tab]"
+                [allowColumnReordering]="true"
+                [allowColumnResizing]="true"
+                [columnAutoWidth]="true"
+                style="display:none">
+                <dxi-column *ngFor="let elem of columnTabs[tab]" dataField="{{elem}}" alignment="left"></dxi-column>
         </dx-data-grid>
+
     </div>
 </section>
