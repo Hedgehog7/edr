@@ -27,6 +27,9 @@ export class DefaultFormComponent implements OnInit{
     // 
     valueTabs: {[nameColumn: string] : any[]} = {};
 
+    popupVisible = false;
+    currentEntity: EntityType = new EntityType();
+
     ngOnInit(){
         // получить список аттрибутов-коллекций
         this.arrAtributesCollection = this.entity.getArrayAtribute();
@@ -60,6 +63,12 @@ export class DefaultFormComponent implements OnInit{
         //     return values;
         // } else
             return this.entity[tab];
+    }
+
+    showInfo(entityEx: EntityType) {
+        console.log(entityEx);
+        this.currentEntity = entityEx;
+        this.popupVisible = true;
     }
 
     getColumnForTab(tab: string): string[] {

@@ -30,7 +30,7 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { DemoDatatables } from './datatable/datatable.component';
 
-import { DxDataGridModule, DxSelectBoxModule, DxTabsModule } from 'devextreme-angular';
+import { DxPopupModule, DxButtonModule, DxDataGridModule, DxSelectBoxModule, DxTabsModule, DxTemplateModule } from 'devextreme-angular';
 
 import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
 /* 
@@ -49,7 +49,10 @@ import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
         NglModule.forRoot(), 
         DxDataGridModule, 
         DxSelectBoxModule, 
-        DxTabsModule
+        DxTabsModule,
+        DxPopupModule,
+        DxButtonModule,
+        DxTemplateModule
     ],
     /**
      * Регистрируем компонент в основном модуле

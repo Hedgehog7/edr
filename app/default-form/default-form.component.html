@@ -24,7 +24,7 @@
                 <div class="row" *ngFor="let atribute of entity.getAtributesNames()">
                     <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >{{atribute}}</div>
                     <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >
-                        <input *ngIf="entity.getNameType(entity[atribute]) == 'String' && atribute != 'studentGroup'" 
+                        <input *ngIf="entity.getNameType(entity[atribute]) == 'String'" 
                                     type="text" name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}"
                                     [ngModel]="entity[atribute]"
                                     class="name" ngModel
@@ -32,12 +32,32 @@
                         <input *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
                                 name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}" ngModel
                                 type="number" [ngModel]="entity[atribute]" class="name" required/>
+                        <dx-button
+                            *ngIf="entity.getNameType(entity[atribute]) != 'Number' &&
+                            entity.getNameType(entity[atribute]) != 'String'&&
+                            entity.getNameType(entity[atribute]) != 'Boolean'&&
+                            entity.getNameType(entity[atribute]) != 'Array'"
+                            class="button-info"
+                            text="..."
+                            (onClick)="showInfo(entity[atribute])">
+                        </dx-button>
                     </div>
                     <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >
                         {{entity.getNameType(entity[atribute])}}
                     </div>
                 </div>
-            </div>            
+            </div>
+            <dx-popup
+                class="popup"
+                [width]="600"
+                [height]="600"
+                [showTitle]="true"
+                title="Information"
+                [dragEnabled]="false"
+                [closeOnOutsideClick]="true"
+                [(visible)]="popupVisible">
+                <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity"></resolver>
+            </dx-popup>        
             <!--<button [disabled]="myForm.invalid" class="btn" (click)="submit(myForm)">Сохранить</button>-->
             
             <!--<div class="tab" *ngFor="let atribute of entity.getAtributesNames()" >
@@ -76,9 +96,8 @@
             
         </form>
         <div id="{{idObj + 'longtabs'}}">
-            <div class="caption">Tabs</div>
+            <div class="caption">Tabs attribute-collection</div>
             <dx-tabs 
-                #apiTabs
                 class="tabs"
                 [dataSource]="arrAtributesCollection"
                 [scrollByContent]="true"
