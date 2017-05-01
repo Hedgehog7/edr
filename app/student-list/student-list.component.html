@@ -41,7 +41,8 @@
 <div class="popup2" id="popup2">
     <button class="closePopup" (click)="closePopup()">Закрыть</button>
     <resolver *ngFor="let student of students" id='{{student.personalNumber}}' class="student-detail" [entity]="student"></resolver>
-    <default-form *ngFor="let student of students" id='{{"edit" + student.personalNumber}}' class="student-detail" [entity]="student" [editMode]="true"></default-form>
+    <default-form *ngFor="let student of students" id='{{"edit" + student.personalNumber}}' class="student-detail" 
+    [entity]="student" [editMode]="true"></default-form>
     <!---->
     <div id="add-new" class="add-new">
         <student [editMode]="true" [student]="newStudent"></student>

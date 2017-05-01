@@ -29,6 +29,20 @@ export class EntityType {
         return typesNames;
     }
 
+    public getMainAttr(): string[] {
+        let obj = this;
+        let attrNames: string[] = [];
+        let typeName: string;
+        do {
+            typeName = this.getNameType(obj);
+            obj = Object.getPrototypeOf(obj);
+            for(let attr of obj.atributes) {
+                console.log(attr);
+            }
+        } while ((typeName) !== "Object")
+        return attrNames;
+    }
+
     get atributes(): Atribute[]{
         let tempStrAtributes: string[] = Object.getOwnPropertyNames(this);
         let tempListAtributes: Atribute[] = [];        
@@ -39,6 +53,7 @@ export class EntityType {
     }
 
     public getNameType(obj: any): string {
+        // console.log("name type, fuck!");
         // if(Object.getPrototypeOf(obj).constructor !==)
         if(obj == null) {
             return 'null or undefined';
@@ -48,6 +63,7 @@ export class EntityType {
     }
 
     public getAtributesNames(): string[] {
+        // console.log('attrNames fuck!');
         let namesOfAtributes: string[] = [];
         for(let atribute of this.atributes) {
             namesOfAtributes.push(atribute.nameAtribute);
@@ -61,6 +77,16 @@ export class EntityType {
             namesOfTypes.push(this.getNameType(this[atributeName]));
         }
         return namesOfTypes;
+    }
+
+    public getArrayAtribute(): string[] {
+        let arr: string[] = [];
+        for(let atribute of this.getAtributesNames()) {
+            if(this.getNameType(this[atribute]) == 'Array')
+                arr.push(atribute);
+        }
+        // console.log("fuck!");
+        return arr;
     }
 
     // public getNamesOfParents<T>(obj: T): string[] {

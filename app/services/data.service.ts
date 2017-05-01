@@ -3,7 +3,9 @@ import { Student } from '../data/students';
 import { Tutor } from '../data/tutor';
 import { EntityType } from '../test/entity';
 import { STUDENTS, SOMEPERSONS, TUTORS, PERSONANDSTUDENT } from '../data/data-test';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class DataService {
     
     persons: Person[] = SOMEPERSONS;
@@ -13,6 +15,10 @@ export class DataService {
 
     getStudents(): Student[] {
         return this.students;
+    }
+
+    getStudent(): Student {
+        return this.students[0];
     }
 
     getPersons(): Person[] {

@@ -19,13 +19,18 @@ export class TestTabsComponent {
     tutors: Tutor[];
     variousTypes: EntityType[];
 
-    constructor(private dataService: DataService) {}
-
-    ngOnInit() {
+    constructor(private dataService: DataService) {
         this.persons = this.dataService.getPersons();
         this.students = this.dataService.getStudents();
         this.tutors = this.dataService.getTutors();
         this.variousTypes = this.dataService.getVariousTypes();
+    }
+
+    ngOnInit() {
+        // this.persons = this.dataService.getPersons();
+        // this.students = this.dataService.getStudents();
+        // this.tutors = this.dataService.getTutors();
+        // this.variousTypes = this.dataService.getVariousTypes();
     }
 }
 

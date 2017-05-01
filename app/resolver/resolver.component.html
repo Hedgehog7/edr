@@ -1,6 +1,6 @@
 <div>
     <div *ngIf="entity.getComponentNameOfType() == 'default'">
-        <default-form [entity]="entity"></default-form>
+        <default-form ></default-form>
     </div>
     <div *ngIf="entity.getComponentNameOfType() == 'PersonComponent'">
         <person [person]="entity"></person>

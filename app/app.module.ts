@@ -30,7 +30,7 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { DemoDatatables } from './datatable/datatable.component';
 
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxSelectBoxModule, DxTabsModule } from 'devextreme-angular';
 
 import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
 /* 
@@ -43,7 +43,14 @@ import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
 /*
     imports указывется, что модуль импоритрует
 */
-    imports: [BrowserModule, FormsModule, NglModule.forRoot(), DxDataGridModule],
+    imports: [
+        BrowserModule,
+        FormsModule, 
+        NglModule.forRoot(), 
+        DxDataGridModule, 
+        DxSelectBoxModule, 
+        DxTabsModule
+    ],
     /**
      * Регистрируем компонент в основном модуле
      */
