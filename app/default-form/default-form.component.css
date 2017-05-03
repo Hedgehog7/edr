@@ -1,5 +1,5 @@
-input.ng-touched.ng-invalid {border:solid red 2px;}
-input.ng-touched.ng-valid {border:solid green 2px;}
+/*input.ng-touched.ng-invalid {border:solid red 2px;}
+input.ng-touched.ng-valid {border:solid green 2px;}*/
 
 .btn {
     border: black solid 1px;
@@ -94,7 +94,3 @@ th, td {
     border: 1px solid #ccc;
     border-top: none;
 }
-
-/*.tabs {
-    width: 100%;
-}*/

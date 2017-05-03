@@ -18,9 +18,11 @@ export const SOMETHING: number[] = [1,2,3,4,5,6];
 export const OLYMPIADS: Olympiad[] = [];
 OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по физике', 2016, 'Победитель', new Discipline('Physics','Physics')));
 OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по физике', 2015, 'Участник', new Discipline('Physics','Physics')));
+OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по математике', 2015, 'Участник', new Discipline('Mathematical analysis','Math.an.')));
+
 
 export const GROUPS: Group[] = [];
-const testGroup: Group = new Group('Б13-507', 2012, 'Программная инжененрия');
+const testGroup: Group = new Group('Б13-507', 2012, 'Программная инженерия');
 const testGroup2: Group = new Group('Б13-508', 2013, 'Прикладная математика');
 GROUPS.push(new Group('Б13-507', 2012, 'Программная инжененрия'));
 

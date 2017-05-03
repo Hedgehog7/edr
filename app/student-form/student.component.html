@@ -12,7 +12,7 @@
             <span class="age">Номер зачётной книжки: {{ student.personalNumber }}</span>
             <span class="numberDepartment">Кафедра: {{ student.numberDepartment }}</span>
             <span class="age">Возраст: {{ student.age }}</span>
-            <span class="studentGroup">Группа: {{ student.studentGroup }}</span>
+            <span class="studentGroup">Группа: {{ student.studentGroup.name }}</span>
         </div>
     </div>
     <div class="container" *ngIf="editMode==true">

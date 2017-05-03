@@ -16,4 +16,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ResolverComponent {
     @Input() entity: EntityType;
+    @Input() editMode: Boolean = false;
 }

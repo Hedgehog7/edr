@@ -7,10 +7,39 @@
 				<div class="col">Имя атрибута</div><div class="col">Значение</div><div class="col">Тип</div>
 			</div>		
 			<div class="row" *ngFor="let atribute of entity.getAtributesNames()">
-				<div class="col">{{atribute}}</div>
-                <div class="col">{{entity[atribute]}}</div>
-                <div class="col">{{entity.getNameType(entity[atribute])}}</div>
+				<div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col">
+                    {{atribute}}
+                </div>
+                <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col">
+                    <div *ngIf="entity.getNameType(entity[atribute]) == 'String' || 
+                                entity.getNameType(entity[atribute]) == 'Number' ||
+                                entity.getNameType(entity[atribute]) == 'Boolean'">
+                        {{entity[atribute]}}
+                    </div>
+                    <dx-button
+                        *ngIf="entity.getNameType(entity[atribute]) != 'Number' &&
+                        entity.getNameType(entity[atribute]) != 'String'&&
+                        entity.getNameType(entity[atribute]) != 'Boolean'&&
+                        entity.getNameType(entity[atribute]) != 'Array'"
+                        class="button-info"
+                        text="..."
+                        (onClick)="showInfo(entity[atribute])">
+                    </dx-button>
+                </div>
+                <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col">
+                    {{entity.getNameType(entity[atribute])}}
+                </div>
 			</div>
+            <dx-popup
+                class="popup"
+                style="overflow:auto"
+                [showTitle]="true"
+                title="Information"
+                [dragEnabled]="false"
+                [closeOnOutsideClick]="true"
+                [(visible)]="popupVisible">
+                <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="false"></resolver>
+            </dx-popup>
 		</div>
     </div>
     <!-- Режим редактирования -->
@@ -49,51 +78,14 @@
             </div>
             <dx-popup
                 class="popup"
-                [width]="600"
-                [height]="600"
+                style="overflow:auto"
                 [showTitle]="true"
                 title="Information"
                 [dragEnabled]="false"
                 [closeOnOutsideClick]="true"
                 [(visible)]="popupVisible">
-                <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity"></resolver>
+                <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="true"></resolver>
             </dx-popup>        
-            <!--<button [disabled]="myForm.invalid" class="btn" (click)="submit(myForm)">Сохранить</button>-->
-            
-            <!--<div class="tab" *ngFor="let atribute of entity.getAtributesNames()" >
-                <button *ngIf = "entity.getNameType(entity[atribute]) != 'String' &&
-                                   entity.getNameType(entity[atribute]) != 'Number' &&
-                                   entity.getNameType(entity[atribute]) != 'Boolean' &&
-                                   entity.getNameType(entity[atribute]) != 'null or undefined'" 
-                        class="tablinks" (click)="openTab(idObj + atribute)" >{{atribute}}</button>
-            </div>-->
-
-            <!-- Отображения сложных типов -->
-            <!--<div id = "{{idObj + atribute}}" class="entity_attr" *ngFor="let atribute of entity.getAtributesNames()">
-                <resolver *ngIf = "entity.getNameType(entity[atribute]) != 'String' &&
-                                   entity.getNameType(entity[atribute]) != 'Number' &&
-                                   entity.getNameType(entity[atribute]) != 'Boolean' &&
-                                   entity.getNameType(entity[atribute]) != 'null or undefined'" 
-                          [entity]="entity[atribute]"></resolver>
-            </div>-->
-            <!--<div id="scrolledtabs">
-                <div class="caption">Tabs with Overflow</div>
-                <dx-tabs
-                    #apiTabs
-                    [dataSource]="tabsCollection"
-                    [width]="300"
-                    [scrollByContent]="true"
-                    [showNavButtons]="true"
-                ></dx-tabs>
-            </div>-->
-            <!--<div *ngFor="let tab of tabsCollection">
-                <dx-data-grid
-                id="{{idObj+'gridContainer'}}"
-                [dataSource]="entity[tab]"
-                [columns]="entity[tab][0].getAtributesNames()">
-                </dx-data-grid>
-            </div>-->
-            
         </form>
         <div id="{{idObj + 'longtabs'}}">
             <div class="caption">Tabs attribute-collection</div>
@@ -105,21 +97,35 @@
                 (onItemClick)=selectTab($event)
             ></dx-tabs>
         </div>
-        <!--<dx-data-grid *ngFor="let tab of arrAtributesCollection"
-                id="{{idObj+'gridContainer'+tab}}"
-                [dataSource]="valueTabs[tab]"
-                [columns]="columnTabs[tab]"
-                style="display:none">
-        </dx-data-grid>-->
-
         <dx-data-grid *ngFor="let tab of arrAtributesCollection"
                 id="{{idObj+'gridContainer'+tab}}"
                 [dataSource]="valueTabs[tab]"
                 [allowColumnReordering]="true"
                 [allowColumnResizing]="true"
                 [columnAutoWidth]="true"
+                [rowAlternationEnabled]="true"
+                [hoverStateEnabled]="true"
                 style="display:none">
-                <dxi-column *ngFor="let elem of columnTabs[tab]" dataField="{{elem}}" alignment="left"></dxi-column>
+                <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true"></dxo-editing>
+                <div *ngFor="let elem of columnTabs[tab]">
+                    <div *ngIf="elem.type == 'String' || elem.type == 'Number' || elem.type == 'Boolean'">
+                        <dxi-column 
+                            dataField="{{elem.name}}"
+                            alignment="left">
+                        </dxi-column>
+                    </div>
+                    <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean'">
+                        <dxi-column 
+                            dataField="{{elem.name}}"
+                            alignment="left"
+                            cellTemplate="cTempl">
+                        </dxi-column>
+                    </div>
+                    <div *dxTemplate="let data of 'cTempl'">
+                        <!--<span>{{data}}</span>-->
+                        <dx-button class="button-info" text="..."  (onClick)="showInfo(data.value)">></dx-button>
+                    </div>
+                </div>                
         </dx-data-grid>
 
     </div>
