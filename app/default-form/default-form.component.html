@@ -100,30 +100,30 @@
                     <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >
                         <dx-text-box
                             *ngIf="entity.getNameType(entity[atribute]) == 'String'"
-                            value="{{entity[atribute]}}">
+                            [(ngModel)]="model[atribute]" name="{{atribute+idObj}}">
                             <dx-validator [validationGroup]="idObj+vGr">
-                                <dxi-validation-rule type="required" message="required {{atribute + idObj}}"></dxi-validation-rule>
+                                <dxi-validation-rule type="required" message="required {{atribute}}"></dxi-validation-rule>
                             </dx-validator>
                         </dx-text-box>
                         <dx-number-box 
                             *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
-                            value="{{entity[atribute]}}">
+                            [(ngModel)]="model[atribute]" name="{{atribute+idObj}}">
                             <dx-validator [validationGroup]="idObj+vGr">
-                                <dxi-validation-rule type="required" message="required {{atribute + idObj}}"></dxi-validation-rule>
+                                <dxi-validation-rule type="required" message="required {{atribute}}"></dxi-validation-rule>
                                 <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
                             </dx-validator>
                         </dx-number-box>
                         <dx-check-box
                             *ngIf="entity.getNameType(entity[atribute]) == 'Boolean'"
-                            value="{{entity[atribute]}}">
+                            [(ngModel)]="model[atribute]" name="{{atribute+idObj}}">
                             <dx-validator [validationGroup]="idObj+vGr">
-                                <dxi-validation-rule  type="required" message="required {{atribute + idObj}}"></dxi-validation-rule>
+                                <dxi-validation-rule  type="required" message="required {{atribute}}"></dxi-validation-rule>
                             </dx-validator>
                         </dx-check-box>
                         <dx-button
                             *ngIf="entity.getNameType(entity[atribute]) != 'Number' &&
-                            entity.getNameType(entity[atribute]) != 'String'&&
-                            entity.getNameType(entity[atribute]) != 'Boolean'&&
+                            entity.getNameType(entity[atribute]) != 'String' &&
+                            entity.getNameType(entity[atribute]) != 'Boolean' &&
                             entity.getNameType(entity[atribute]) != 'Array'"
                             class="button-info"
                             text="..."
@@ -135,7 +135,7 @@
                     </div>
                 </div>
             </div>
-            <dx-validation-summary id="{{'summary' + idObj}}"></dx-validation-summary>
+            <dx-validation-summary [validationGroup]="idObj+vGr" id="{{'summary' + idObj}}"></dx-validation-summary>
             <dx-button 
                 id="button + {{idObj}}"
                 text="Сохранить"

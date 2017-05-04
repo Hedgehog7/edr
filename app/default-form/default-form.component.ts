@@ -28,6 +28,8 @@ export class DefaultFormComponent implements OnInit{
     //
     valueTabs: {[nameColumn: string] : any[]} = {};
 
+    model: EntityType = new EntityType();
+
     popupVisible = false;
     currentEntity: EntityType = new EntityType();
 
@@ -59,15 +61,11 @@ export class DefaultFormComponent implements OnInit{
                     this.valueTabs[attr] = this.entity[attr];
                 }
             } else {
-                // let arr = Object.getOwnPropertyNames(this.entity[attr]);
-                // console.log(Object.getOwnPropertyNames(this.entity[attr]));
-                // let m: Column[] = [];
-                // for(let el of arr) 
-                //     m.push(new Column(el,this.entity.getNameType(this.entity[attr][0][el])));
-                // this.columnTabs[attr] = m;
                 this.valueTabs[attr] = this.entity[attr];
             }           
         }
+        
+        this.model = this.entity;
     }
 
     /* НЕ ИСПОЛЬЗУЕТСЯ */
@@ -95,11 +93,6 @@ export class DefaultFormComponent implements OnInit{
         // console.log(e);
     }
 
-    /* НЕ ИИСПОЛЬЗУЕТСЯ */
-    // getColumnForTab(tab: string): string[] {
-    //     return Object.getOwnPropertyNames(this.entity[tab][0]);
-    // }
-
     // submit(form: NgForm){
     //     var x = form.value;
     //     let i: number = 0;
@@ -123,7 +116,8 @@ export class DefaultFormComponent implements OnInit{
 
     onFormSubmit (e: any) {
         console.log(this.entity);
-        console.log(e);
+        console.log(this.model);
+        this.entity = this.model;
         notify({
             message: "You have submitted the form",
             position: {
@@ -132,9 +126,8 @@ export class DefaultFormComponent implements OnInit{
             }
         }, "success", 3000);
         
-        e.preventDefault();
-        console.log(this.entity);
     }
+
     // НЕ ИСПОЛЬЗУЕТСЯ
     //****************/
     // openTab(id: string) {
