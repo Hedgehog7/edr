@@ -1,6 +1,7 @@
 import { DataService } from '../services/data.service';
 import { Student } from '../data/students';
 import { STUDENTS } from '../data/data-test';
+import { Group } from '../data/group';
 import { Component, Input } from '@angular/core';
 
 
@@ -17,11 +18,12 @@ export class ListStudentComponent{
     constructor(private dataService: DataService) {}
 
     ngOnInit() {
-        this.newStudent = new Student(null,null,null,null,null,null,null, null, null, null);
+        this.newStudent = new Student('','','', 0, 0, new Group('', 0,''), 0,[],[],[]);
     }
 
     updateNewStudent() {
-        this.newStudent = new Student(null,null,null,null,null,null,null, null, null, null);
+        this.newStudent = new Student('','','', 0, 0, new Group('', 0,''), 0,[],[],[]);
+        // this.newStudent = new Student(null,null,null,null,null,null,null, null, null, null);
     }
 
     delete(student: Student) {

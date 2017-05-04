@@ -32,7 +32,7 @@
 			</div>
             <dx-popup
                 class="popup"
-                style="overflow:auto"
+                style="overflow-y: scroll"
                 [showTitle]="true"
                 title="Information"
                 [dragEnabled]="false"
@@ -41,10 +41,55 @@
                 <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="false"></resolver>
             </dx-popup>
 		</div>
+        <div id="{{idObj + 'longtabsView'}}">
+            <div class="caption">Tabs attribute-collection</div>
+            <dx-tabs 
+                class="tabs"
+                [dataSource]="arrAtributesCollection"
+                [scrollByContent]="true"
+                [showNavButtons]="true"
+                (onItemClick)="selectTab($event, 'View')"
+            ></dx-tabs>
+        </div>
+        <dx-data-grid *ngFor="let tab of arrAtributesCollection"
+                id="{{idObj+'gridContainerView'+tab}}"
+                [dataSource]="valueTabs[tab]"
+                [allowColumnReordering]="true"
+                [allowColumnResizing]="true"
+                [columnAutoWidth]="true"
+                [rowAlternationEnabled]="false"
+                [hoverStateEnabled]="false"
+                style="display:none">
+                <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false"></dxo-editing>
+                <div *ngFor="let elem of columnTabs[tab]">
+                    <div *ngIf="elem.type == 'String' || elem.type == 'Number' || elem.type == 'Boolean'">
+                        <dxi-column 
+                            dataField="{{elem.name}}"
+                            alignment="center">
+                        </dxi-column>
+                    </div>
+                    <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean'">
+                        <dxi-column 
+                            dataField="{{elem.name}}"
+                            alignment="left"
+                            cellTemplate="cTempl"
+                            editCellTemplate="cTempl"
+                            aligment="center">
+                        </dxi-column>
+                    </div>
+                    <div *dxTemplate="let data of 'cTempl'">
+                        <dx-button
+                        class="button-info"
+                        icon="box"
+                        [hoverStateEnabled]="false"
+                        style="width:100%; border:0px; background: #fff;"
+                        (onClick)="showInfo(data.value)"></dx-button>
+                    </div>
+                </div>                
+        </dx-data-grid>
     </div>
-    <!-- Режим редактирования -->
     <div *ngIf="editMode==true">
-        <form #myForm="ngForm" novalidate>            
+        <form action="your-action" (submit)="onFormSubmit($event)" >            
             <div class="table">
                 <caption>Универсальная форма({{entity.nameEntity}})</caption>
                 <div class="header">
@@ -53,14 +98,28 @@
                 <div class="row" *ngFor="let atribute of entity.getAtributesNames()">
                     <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >{{atribute}}</div>
                     <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >
-                        <input *ngIf="entity.getNameType(entity[atribute]) == 'String'" 
-                                    type="text" name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}"
-                                    [ngModel]="entity[atribute]"
-                                    class="name" ngModel
-                                    pattern="[A-Za-zА-Яа-яЁё]+" required>
-                        <input *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
-                                name="{{'atribute' + entity.getAtributesNames().indexOf(atribute)}}" ngModel
-                                type="number" [ngModel]="entity[atribute]" class="name" required/>
+                        <dx-text-box
+                            *ngIf="entity.getNameType(entity[atribute]) == 'String'"
+                            value="{{entity[atribute]}}">
+                            <dx-validator [validationGroup]="idObj+vGr">
+                                <dxi-validation-rule type="required" message="required {{atribute + idObj}}"></dxi-validation-rule>
+                            </dx-validator>
+                        </dx-text-box>
+                        <dx-number-box 
+                            *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
+                            value="{{entity[atribute]}}">
+                            <dx-validator [validationGroup]="idObj+vGr">
+                                <dxi-validation-rule type="required" message="required {{atribute + idObj}}"></dxi-validation-rule>
+                                <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
+                            </dx-validator>
+                        </dx-number-box>
+                        <dx-check-box
+                            *ngIf="entity.getNameType(entity[atribute]) == 'Boolean'"
+                            value="{{entity[atribute]}}">
+                            <dx-validator [validationGroup]="idObj+vGr">
+                                <dxi-validation-rule  type="required" message="required {{atribute + idObj}}"></dxi-validation-rule>
+                            </dx-validator>
+                        </dx-check-box>
                         <dx-button
                             *ngIf="entity.getNameType(entity[atribute]) != 'Number' &&
                             entity.getNameType(entity[atribute]) != 'String'&&
@@ -76,57 +135,90 @@
                     </div>
                 </div>
             </div>
-            <dx-popup
-                class="popup"
-                style="overflow:auto"
-                [showTitle]="true"
-                title="Information"
-                [dragEnabled]="false"
-                [closeOnOutsideClick]="true"
-                [(visible)]="popupVisible">
-                <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="true"></resolver>
-            </dx-popup>        
+            <dx-validation-summary id="{{'summary' + idObj}}"></dx-validation-summary>
+            <dx-button 
+                id="button + {{idObj}}"
+                text="Сохранить"
+                type="success"  
+                [validationGroup]="idObj+vGr"
+                [useSubmitBehavior]="true"
+                style="width:100%">
+            </dx-button>
         </form>
-        <div id="{{idObj + 'longtabs'}}">
+        <dx-popup
+            class="popup"
+            style="overflow-y: scroll"
+            [showTitle]="true"
+            title="Information"
+            [dragEnabled]="false"
+            [closeOnOutsideClick]="true"
+            [(visible)]="popupVisible">
+            <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="true"></resolver>
+        </dx-popup>
+
+        
+        <div id="{{idObj + 'longtabsEdit'}}">
             <div class="caption">Tabs attribute-collection</div>
             <dx-tabs 
                 class="tabs"
                 [dataSource]="arrAtributesCollection"
                 [scrollByContent]="true"
                 [showNavButtons]="true"
-                (onItemClick)=selectTab($event)
+                (onItemClick)="selectTab($event, 'Edit')"
             ></dx-tabs>
         </div>
+            
         <dx-data-grid *ngFor="let tab of arrAtributesCollection"
-                id="{{idObj+'gridContainer'+tab}}"
+                id="{{idObj+'gridContainerEdit'+tab}}"
                 [dataSource]="valueTabs[tab]"
                 [allowColumnReordering]="true"
                 [allowColumnResizing]="true"
                 [columnAutoWidth]="true"
-                [rowAlternationEnabled]="true"
-                [hoverStateEnabled]="true"
+                [rowAlternationEnabled]="false"
+                [hoverStateEnabled]="false"
                 style="display:none">
-                <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true"></dxo-editing>
+                <dxo-editing mode="row" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true"></dxo-editing>
                 <div *ngFor="let elem of columnTabs[tab]">
-                    <div *ngIf="elem.type == 'String' || elem.type == 'Number' || elem.type == 'Boolean'">
+                    <div *ngIf="elem.type == 'String'">
                         <dxi-column 
                             dataField="{{elem.name}}"
-                            alignment="left">
+                            alignment="center">
+                            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                        </dxi-column>
+                    </div>
+                    <div *ngIf="elem.type == 'Number'">
+                        <dxi-column 
+                            dataField="{{elem.name}}"
+                            alignment="center">
+                            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                            <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
+                        </dxi-column>
+                    </div>
+                    <div *ngIf="elem.type == 'Boolean'">
+                        <dxi-column 
+                            dataField="{{elem.name}}"
+                            alignment="center">
+                            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
                         </dxi-column>
                     </div>
                     <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean'">
                         <dxi-column 
                             dataField="{{elem.name}}"
                             alignment="left"
-                            cellTemplate="cTempl">
+                            cellTemplate="cTempl"
+                            editCellTemplate="cTempl"
+                            aligment="center">
                         </dxi-column>
                     </div>
                     <div *dxTemplate="let data of 'cTempl'">
-                        <!--<span>{{data}}</span>-->
-                        <dx-button class="button-info" text="..."  (onClick)="showInfo(data.value)">></dx-button>
+                        <dx-button
+                        class="button-info"
+                        icon="box"
+                        [hoverStateEnabled]="false"
+                        style="width:100%; border:0px; background: #fff;"
+                        (onClick)="showInfo(data.value)"></dx-button>
                     </div>
                 </div>                
         </dx-data-grid>
-
     </div>
 </section>

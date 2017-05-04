@@ -19,7 +19,7 @@ export const OLYMPIADS: Olympiad[] = [];
 OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по физике', 2016, 'Победитель', new Discipline('Physics','Physics')));
 OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по физике', 2015, 'Участник', new Discipline('Physics','Physics')));
 OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по математике', 2015, 'Участник', new Discipline('Mathematical analysis','Math.an.')));
-
+export const OLYMPIADS2: Olympiad[] = [];
 
 export const GROUPS: Group[] = [];
 const testGroup: Group = new Group('Б13-507', 2012, 'Программная инженерия');
@@ -27,7 +27,7 @@ const testGroup2: Group = new Group('Б13-508', 2013, 'Прикладная ма
 GROUPS.push(new Group('Б13-507', 2012, 'Программная инжененрия'));
 
 export const STUDENTS: Student[] = [];
-STUDENTS.push(new Student('Petr','Petrov','Petrovich', 100000, 22, testGroup, 19, DISCIPLINES, OLYMPIADS,SOMETHING));
+STUDENTS.push(new Student('Petr','Petrov','Petrovich', 100000, 22, testGroup, 19, DISCIPLINES, OLYMPIADS2, SOMETHING));
 STUDENTS.push(new Student('Ivan','Ivanov','Ivanovich', 200000, 21, testGroup2, 18, DISCIPLINES, OLYMPIADS,SOMETHING));
 STUDENTS.push(new Student('Victor','Victorov','Victorovich', 300000, 31, testGroup2, 18, DISCIPLINES, OLYMPIADS,SOMETHING));
 STUDENTS.push(new Student('Vladimir','Vladimirov','Vladimirovich', 400000, 44, testGroup, 20, DISCIPLINES, OLYMPIADS,SOMETHING));

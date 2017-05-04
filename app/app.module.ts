@@ -1,6 +1,3 @@
-/*
-    '@angular/core' - название пакета из npm
-*/
 import { NgModule } from '@angular/core';
 /*
     BrowserModule - модуль необходимый для работы в браузере,
@@ -30,7 +27,18 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { DemoDatatables } from './datatable/datatable.component';
 
-import { DxPopupModule, DxButtonModule, DxDataGridModule, DxSelectBoxModule, DxTabsModule, DxTemplateModule } from 'devextreme-angular';
+import { DxPopupModule,
+        DxButtonModule, 
+        DxDataGridModule, 
+        DxSelectBoxModule, 
+        DxTabsModule, 
+        DxTemplateModule, 
+        DxTextBoxModule,
+        DxValidatorModule,
+        DxNumberBoxModule,
+        DxCheckBoxModule,
+        DxValidationSummaryModule,
+        DxFormModule } from 'devextreme-angular';
 
 import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
 /* 
@@ -52,7 +60,13 @@ import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
         DxTabsModule,
         DxPopupModule,
         DxButtonModule,
-        DxTemplateModule
+        DxTemplateModule,
+        DxTextBoxModule,
+        DxValidatorModule,
+        DxNumberBoxModule,
+        DxCheckBoxModule,
+        DxValidationSummaryModule,
+        DxFormModule
     ],
     /**
      * Регистрируем компонент в основном модуле
