@@ -3,8 +3,9 @@ import { Person } from '../data/persons';
 import { Group } from '../data/group';
 import { Discipline } from '../data/discipline';
 import { Olympiad } from '../data/olimpiad';
+import { OnInit } from "@angular/core";
 
-export class Student extends Person {
+export class Student extends Person implements OnInit{
     
     constructor(public name: string,
                 public surname: string,
@@ -18,5 +19,8 @@ export class Student extends Person {
                 public something: number[]
                 ){
         super(name, surname, age);
+    }
+    ngOnInit(){
+        this.nameEntity = this.getNameType(this);
     }
 }

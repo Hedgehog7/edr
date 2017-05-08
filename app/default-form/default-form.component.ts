@@ -40,6 +40,7 @@ export class DefaultFormComponent implements OnInit{
         
         // для кажого атрибута-коллекции определяем его набор столбцов
         // в соответствии с типом
+        console.log(this.entity.nameEntity);
         for(let attr of this.arrAtributesCollection) {
                 if(this.entity[attr].length != 0) {
                     let type = this.entity.getNameType(this.entity[attr][0]);

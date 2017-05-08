@@ -3,8 +3,9 @@ import { RealationShip } from './realationship';
 import { DICTIONARY } from '../data/data-test';
 
 export class EntityType {
-
+    
     private _nameEntity: string = '';
+    private _parentsEntities: EntityType[] = [];
     private _parent: string[] = [];
     private _atributes: Atribute[] = [];
 
@@ -28,22 +29,7 @@ export class EntityType {
         return typesNames;
     }
 
-    public getMainAttr(): string[] {
-        let obj = this;
-        let attrNames: string[] = [];
-        let typeName: string;
-        do {
-            typeName = this.getNameType(obj);
-            obj = Object.getPrototypeOf(obj);
-            for(let attr of obj.atributes) {
-                console.log(attr);
-            }
-        } while ((typeName) !== "Object")
-        return attrNames;
-    }
-
     get atributes(): Atribute[] {
-        // let tempStrAtributes: string[] = Object.getOwnPropertyNames(this);
         let tempListAtributes: Atribute[] = [];        
         
         for(let nameAtribute of Object.getOwnPropertyNames(this)) {
@@ -55,9 +41,14 @@ export class EntityType {
         return tempListAtributes;
     }
 
+    public addParent(newParent: EntityType) {
+        this._parentsEntities.push(newParent);
+    }
+
+    /**
+     * На вход подаётся объект на выходе тип объекта
+     */
     public getNameType(obj: any): string {
-        // console.log("name type, fuck!");
-        // if(Object.getPrototypeOf(obj).constructor !==)
         if(obj == null) {
             return 'null or undefined';
         } else {
@@ -65,6 +56,9 @@ export class EntityType {
         }
     }
 
+    /**
+     * Возвращает массива атрибутов без атрибутов "описания типа"
+     */
     public getAtributesNames(): string[] {
         let namesOfAtributes: string[] = [];        
         let entityProp: string[] = Object.getOwnPropertyNames(new EntityType());
@@ -76,18 +70,16 @@ export class EntityType {
         return namesOfAtributes;
     }
 
+    /**
+     * Возвращает атрибуты относящиеся только к EntityType nameEntity и т.д.
+     */
     public getEntityNamesAttr(): string[] {
         return Object.getOwnPropertyNames(new EntityType());
     }
 
-    public getNamesAtrubutesTypes(): string[] {
-        let namesOfTypes: string[] = [];
-        for(let atributeName of this.getAtributesNames()) {
-            namesOfTypes.push(this.getNameType(this[atributeName]));
-        }
-        return namesOfTypes;
-    }
-
+    /**
+     * Возвращает атрибуты "коллекции"
+    */
     public getArrayAtribute(): string[] {
         let arr: string[] = [];
         let entityProp: string[] = Object.getOwnPropertyNames(new EntityType());
@@ -100,19 +92,9 @@ export class EntityType {
         return arr;
     }
 
-    // public getNamesOfParents<T>(obj: T): string[] {
-    //     let className: string;
-    //     let classNames: string[] = [];
-    //     do {
-    //         className = this.getNameType(obj);
-    //         classNames.push(className);
-    //         obj = Object.getPrototypeOf(obj);
-    //     } while((className) !== "Object")
-
-    //     return classNames;
-    // }
-
-    // Подбор компонента для "типа"
+    /**
+     * Подбор компонента для "типа"
+     */
     public getComponentNameOfType(): string {
         let nameComponent: string;
         for(let parentName of this.parent) {

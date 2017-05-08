@@ -7,4 +7,8 @@ export class Group extends EntityType {
                 public specialization: string){
         super();
     }
+
+    ngOnInit(){
+        this.nameEntity = this.getNameType(this);
+    }
 }
