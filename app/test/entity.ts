@@ -4,8 +4,8 @@ import { DICTIONARY } from '../data/data-test';
 
 export class EntityType {
 
-    private _nameEntity: string;
-    private _parent: string[];
+    private _nameEntity: string = '';
+    private _parent: string[] = [];
     private _atributes: Atribute[] = [];
 
     set nameEntity(newName: string) {
@@ -66,12 +66,18 @@ export class EntityType {
     }
 
     public getAtributesNames(): string[] {
-        // console.log('attrNames fuck!');
-        let namesOfAtributes: string[] = [];
+        let namesOfAtributes: string[] = [];        
+        let entityProp: string[] = Object.getOwnPropertyNames(new EntityType());
+
         for(let atribute of this.atributes) {
-            namesOfAtributes.push(atribute.nameAtribute);
+            if(entityProp.indexOf(atribute.nameAtribute)==-1)
+                namesOfAtributes.push(atribute.nameAtribute);
         }
         return namesOfAtributes;
+    }
+
+    public getEntityNamesAttr(): string[] {
+        return Object.getOwnPropertyNames(new EntityType());
     }
 
     public getNamesAtrubutesTypes(): string[] {
@@ -84,8 +90,11 @@ export class EntityType {
 
     public getArrayAtribute(): string[] {
         let arr: string[] = [];
+        let entityProp: string[] = Object.getOwnPropertyNames(new EntityType());
+        // console.log(entityProp);
         for(let atribute of this.getAtributesNames()) {
-            if(this.getNameType(this[atribute]) == 'Array' && atribute != ('_atributes'||'atributes'))
+            // console.log(atribute + ' : ' + entityProp.indexOf(atribute));
+            if(this.getNameType(this[atribute]) == 'Array' && entityProp.indexOf(atribute)==-1)
                 arr.push(atribute);
         }
         return arr;
@@ -112,6 +121,7 @@ export class EntityType {
                 return nameComponent;
             }
         }
-        return 'default';        
+        return 'default';
+        
     }
 }

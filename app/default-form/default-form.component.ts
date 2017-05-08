@@ -55,7 +55,7 @@ export class DefaultFormComponent implements OnInit{
                         // массив объектов колонок
                         let m: Column[] = [];
                         for(let el of arr)
-                            if(el != 'atributes' && el != '_atributes')
+                            if(this.entity.getEntityNamesAttr().indexOf(el)==-1)
                                 m.push(new Column(el, this.entity.getNameType(this.entity[attr][0][el])));
                         this.columnTabs[attr] = m;
                         this.valueTabs[attr] = this.entity[attr];
