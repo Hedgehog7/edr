@@ -3,7 +3,11 @@
         <div class="entity">
             <span class="title"> {{ 1 + entityArray.indexOf(entity) +')' }} </span>
             <ng-container *ngFor="let atribute of entity.getAtributesNames()">
-                <span class="title" *ngIf="entity.getAtributesNames().indexOf(atribute)<3">{{ '_' + entity[atribute] }}</span>
+                <span
+                    class="title"
+                    *ngIf="entity.getAtributesNames().indexOf(atribute)<3 &&
+                    atribute!='_atributes'">
+                        {{ '_' + entity[atribute] }}</span>
             </ng-container>
 
             <div class="actions">

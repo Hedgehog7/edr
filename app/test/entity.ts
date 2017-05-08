@@ -6,7 +6,7 @@ export class EntityType {
 
     private _nameEntity: string;
     private _parent: string[];
-    private _atributes: Atribute[];
+    private _atributes: Atribute[] = [];
 
     set nameEntity(newName: string) {
         this._nameEntity = newName;
@@ -51,6 +51,7 @@ export class EntityType {
                 .push(new Atribute(nameAtribute,
                         this.getNameType(Object.getOwnPropertyDescriptor(this, nameAtribute).value)));
         }
+        this._atributes = tempListAtributes;
         return tempListAtributes;
     }
 
@@ -84,7 +85,7 @@ export class EntityType {
     public getArrayAtribute(): string[] {
         let arr: string[] = [];
         for(let atribute of this.getAtributesNames()) {
-            if(this.getNameType(this[atribute]) == 'Array')
+            if(this.getNameType(this[atribute]) == 'Array' && atribute != ('_atributes'||'atributes'))
                 arr.push(atribute);
         }
         return arr;
@@ -111,7 +112,6 @@ export class EntityType {
                 return nameComponent;
             }
         }
-        return 'default';
-        
+        return 'default';        
     }
 }

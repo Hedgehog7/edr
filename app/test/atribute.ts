@@ -11,6 +11,6 @@ export class Atribute {
     }
 
     get typeAtribute(): string {
-        return '';
+        return this._typeAtribute;
     }
 }

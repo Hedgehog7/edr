@@ -41,66 +41,41 @@ export class DefaultFormComponent implements OnInit{
         // для кажого атрибута-коллекции определяем его набор столбцов
         // в соответствии с типом
         for(let attr of this.arrAtributesCollection) {
-            
-            if(this.entity[attr].length != 0) {
-                let type = this.entity.getNameType(this.entity[attr][0]);
-                if(type == ("Number" || "String" || "Boolean")) {
-                    this.columnTabs[attr] = [new Column ("Value", type)];
-                    let arr: any[] = [];
-                    for(let elem of this.entity[attr])
-                        arr.push({"Value": elem});
-                    this.valueTabs[attr] = arr;
+                if(this.entity[attr].length != 0) {
+                    let type = this.entity.getNameType(this.entity[attr][0]);
+                    if(type == ("Number" || "String" || "Boolean")) {
+                        this.columnTabs[attr] = [new Column ("Value", type)];
+                        let arr: any[] = [];
+                        for(let elem of this.entity[attr])
+                            arr.push({"Value": elem});
+                        this.valueTabs[attr] = arr;
+                    } else {
+                        // массив имен колонок
+                        let arr = Object.getOwnPropertyNames(this.entity[attr][0]);
+                        // массив объектов колонок
+                        let m: Column[] = [];
+                        for(let el of arr)
+                            if(el != 'atributes' && el != '_atributes')
+                                m.push(new Column(el, this.entity.getNameType(this.entity[attr][0][el])));
+                        this.columnTabs[attr] = m;
+                        this.valueTabs[attr] = this.entity[attr];
+                    }
                 } else {
-                    // массив имен колонок
-                    let arr = Object.getOwnPropertyNames(this.entity[attr][0]);
-                    // массив объектов колонок
-                    let m: Column[] = [];
-                    for(let el of arr) 
-                        m.push(new Column(el, this.entity.getNameType(this.entity[attr][0][el])));
-                    this.columnTabs[attr] = m;
                     this.valueTabs[attr] = this.entity[attr];
-                }
-            } else {
-                this.valueTabs[attr] = this.entity[attr];
-            }           
+                }           
         }
         
         this.model = this.entity;
     }
 
-    /* НЕ ИСПОЛЬЗУЕТСЯ */
-    // getColumnTabs(tab: string) {
-        // if(this.entity.getNameType(this.entity[tab][0]) == ("Number" || "String" || "Boolean")) {
-        //     var values = [{}];
-        //     for(let elem of this.entity[tab]){
-        //         // values.push({"Value" : elem});
-        //     }
-        //     console.log(values);
-        //     return values;
-        // } else
-            // return this.entity[tab];
-    // }
-
     showInfo(entityEx: EntityType) {
-        // console.log(entityEx);
         this.currentEntity = entityEx;
         this.popupVisible = true;
     }
 
     testMethod(e: any, data: any) {
-        // console.log(data);
-        // console.log(data.value);
-        // console.log(e);
+        console.log(e);
     }
-
-    // submit(form: NgForm){
-    //     var x = form.value;
-    //     let i: number = 0;
-    //     for(let atribute of this.entity.getAtributesNames()) {
-    //         // console.log(x['atribute'+ (i)]);
-    //         this.entity[atribute] = x['atribute'+ (i++)];
-    //     }
-    // }
 
     selectTab(e: any, type: string) {
         let tab: any = document.getElementById(this.idObj + 'gridContainer' + type + e.itemData);
@@ -127,14 +102,6 @@ export class DefaultFormComponent implements OnInit{
         }, "success", 3000);
         
     }
-
-    // НЕ ИСПОЛЬЗУЕТСЯ
-    //****************/
-    // openTab(id: string) {
-    //     var tab = document.getElementById(id);
-    //     // console.log(tab);
-    //     tab.style.display = tab.style.display == "block" ? "none": "block";
-    // }
 
     getLengthNamesAttrEntity(): number {
         return this.entity.getAtributesNames().length;

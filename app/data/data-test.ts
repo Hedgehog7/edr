@@ -60,7 +60,7 @@ PERSONANDSTUDENT.push(new Tutor('Petr', 'Petrov', 'Petrovich', 'PhD', 123, 30, 5
 
 
 export const DICTIONARY: Dictionary = new Dictionary();
-DICTIONARY.pushNewRecord(new RecordDictionary('Student','StudentComponent'));
+// DICTIONARY.pushNewRecord(new RecordDictionary('Student','StudentComponent'));
 // DICTIONARY.pushNewRecord(new RecordDictionary('Student','PersonComponent'));
-DICTIONARY.pushNewRecord(new RecordDictionary('Person','PersonComponent'));
-DICTIONARY.pushNewRecord(new RecordDictionary('Tutor','TutorComponent'));
+// DICTIONARY.pushNewRecord(new RecordDictionary('Person','PersonComponent'));
+// DICTIONARY.pushNewRecord(new RecordDictionary('Tutor','TutorComponent'));
