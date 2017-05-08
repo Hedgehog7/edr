@@ -23,9 +23,9 @@ import { TestSimpleType } from './test-c/test-c.component';
 
 import { DataService } from './services/data.service';
 
-import { NglModule } from 'ng-lightning/ng-lightning';
+// import { NglModule } from 'ng-lightning/ng-lightning';
 
-import { DemoDatatables } from './datatable/datatable.component';
+// import { DemoDatatables } from './datatable/datatable.component';
 
 import { DxPopupModule,
         DxButtonModule, 
@@ -40,7 +40,7 @@ import { DxPopupModule,
         DxValidationSummaryModule,
         DxFormModule } from 'devextreme-angular';
 
-import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
+// import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
 /* 
     @NgModule() - декоратор указывающий, что это основной модуль приложения
     p.s.: Добавление метаинформации
@@ -54,7 +54,7 @@ import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
     imports: [
         BrowserModule,
         FormsModule, 
-        NglModule.forRoot(), 
+        // NglModule.forRoot(), 
         DxDataGridModule, 
         DxSelectBoxModule, 
         DxTabsModule,
@@ -84,8 +84,8 @@ import { DevDataGrid } from './dev-datagrid/dev-datagrid.component';
         UniversalListComponent,
         TutorComponent,
         TestSimpleType,
-        DemoDatatables,
-        DevDataGrid
+        // DemoDatatables,
+        // DevDataGrid
     ],
     providers: [DataService],
     /**

@@ -2,7 +2,6 @@ import { Atribute } from './atribute';
 import { RealationShip } from './realationship';
 import { DICTIONARY } from '../data/data-test';
 
-
 export class EntityType {
 
     private _nameEntity: string;
@@ -43,11 +42,14 @@ export class EntityType {
         return attrNames;
     }
 
-    get atributes(): Atribute[]{
-        let tempStrAtributes: string[] = Object.getOwnPropertyNames(this);
+    get atributes(): Atribute[] {
+        // let tempStrAtributes: string[] = Object.getOwnPropertyNames(this);
         let tempListAtributes: Atribute[] = [];        
+        
         for(let nameAtribute of Object.getOwnPropertyNames(this)) {
-            tempListAtributes.push(new Atribute(nameAtribute, ''));
+            tempListAtributes
+                .push(new Atribute(nameAtribute,
+                        this.getNameType(Object.getOwnPropertyDescriptor(this, nameAtribute).value)));
         }
         return tempListAtributes;
     }
@@ -85,7 +87,6 @@ export class EntityType {
             if(this.getNameType(this[atribute]) == 'Array')
                 arr.push(atribute);
         }
-        // console.log("fuck!");
         return arr;
     }
 
