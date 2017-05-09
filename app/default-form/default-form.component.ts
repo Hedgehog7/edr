@@ -28,10 +28,10 @@ export class DefaultFormComponent implements OnInit{
     //
     valueTabs: {[nameColumn: string] : any[]} = {};
 
-    model: EntityType = new EntityType();
+    // model: EntityType = new EntityType();
 
     popupVisible = false;
-    currentEntity: EntityType = new EntityType();
+    currentEntity: any;
 
     ngOnInit(){
         // получить список аттрибутов-коллекций
@@ -66,10 +66,11 @@ export class DefaultFormComponent implements OnInit{
                 }           
         }
         
-        this.model = this.entity;
     }
 
     showInfo(entityEx: EntityType) {
+        console.log(entityEx);
+        console.log(entityEx.getAtributesNames());
         this.currentEntity = entityEx;
         this.popupVisible = true;
     }
@@ -91,9 +92,6 @@ export class DefaultFormComponent implements OnInit{
     }
 
     onFormSubmit (e: any) {
-        console.log(this.entity);
-        console.log(this.model);
-        this.entity = this.model;
         notify({
             message: "You have submitted the form",
             position: {

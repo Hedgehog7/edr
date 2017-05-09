@@ -67,6 +67,8 @@ export class EntityType {
             if(entityProp.indexOf(atribute.nameAtribute)==-1)
                 namesOfAtributes.push(atribute.nameAtribute);
         }
+        // console.log(this);
+        // console.log(namesOfAtributes);
         return namesOfAtributes;
     }
 

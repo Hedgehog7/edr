@@ -100,14 +100,14 @@
                     <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >
                         <dx-text-box
                             *ngIf="entity.getNameType(entity[atribute]) == 'String'"
-                            [(ngModel)]="model[atribute]" name="{{atribute+idObj}}">
+                            [(ngModel)]="entity[atribute]" name="{{atribute+idObj}}">
                             <dx-validator [validationGroup]="idObj+vGr">
                                 <dxi-validation-rule type="required" message="required {{atribute}}"></dxi-validation-rule>
                             </dx-validator>
                         </dx-text-box>
                         <dx-number-box 
                             *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
-                            [(ngModel)]="model[atribute]" name="{{atribute+idObj}}">
+                            [(ngModel)]="entity[atribute]" name="{{atribute+idObj}}">
                             <dx-validator [validationGroup]="idObj+vGr">
                                 <dxi-validation-rule type="required" message="required {{atribute}}"></dxi-validation-rule>
                                 <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
@@ -115,7 +115,7 @@
                         </dx-number-box>
                         <dx-check-box
                             *ngIf="entity.getNameType(entity[atribute]) == 'Boolean'"
-                            [(ngModel)]="model[atribute]" name="{{atribute+idObj}}">
+                            [(ngModel)]="entity[atribute]" name="{{atribute+idObj}}">
                             <dx-validator [validationGroup]="idObj+vGr">
                                 <dxi-validation-rule  type="required" message="required {{atribute}}"></dxi-validation-rule>
                             </dx-validator>
@@ -166,8 +166,7 @@
                 [showNavButtons]="true"
                 (onItemClick)="selectTab($event, 'Edit')"
             ></dx-tabs>
-        </div>
-            
+        </div>            
         <dx-data-grid *ngFor="let tab of arrAtributesCollection"
                 id="{{idObj+'gridContainerEdit'+tab}}"
                 [dataSource]="valueTabs[tab]"

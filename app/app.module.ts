@@ -19,7 +19,6 @@ import { PersonListComponent } from './person-list/person-list.component';
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { UniversalListComponent } from './universal-list/universal-list.compnent';
 import { TutorComponent } from './tutor-form/tutor.component';
-import { TestSimpleType } from './test-c/test-c.component';
 
 import { DataService } from './services/data.service';
 
@@ -82,10 +81,7 @@ import { DxPopupModule,
         ListStudentComponent,
         DictionaryComponent,
         UniversalListComponent,
-        TutorComponent,
-        TestSimpleType,
-        // DemoDatatables,
-        // DevDataGrid
+        TutorComponent
     ],
     providers: [DataService],
     /**
