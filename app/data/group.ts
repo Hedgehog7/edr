@@ -6,9 +6,7 @@ export class Group extends EntityType {
                 public yearStart: number,
                 public specialization: string){
         super();
+        this.updateNameEntity();
     }
 
-    ngOnInit(){
-        this.nameEntity = this.getNameType(this);
-    }
 }

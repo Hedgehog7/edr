@@ -5,7 +5,7 @@ import { Discipline } from '../data/discipline';
 import { Olympiad } from '../data/olimpiad';
 import { OnInit } from "@angular/core";
 
-export class Student extends Person implements OnInit{
+export class Student extends Person {
     
     constructor(public name: string,
                 public surname: string,
@@ -19,8 +19,8 @@ export class Student extends Person implements OnInit{
                 public something: number[]
                 ){
         super(name, surname, age);
-    }
-    ngOnInit(){
-        this.nameEntity = this.getNameType(this);
+        // this.nameEntity = this.constructor.name;
+        this.updateNameEntity();
+        // console.log(Object.getPrototypeOf(this));
     }
 }

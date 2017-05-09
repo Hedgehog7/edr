@@ -11,7 +11,7 @@
             </ng-container>
 
             <div class="actions">
-                <button class="detail-icon" (click)="viewdiv(idList + entityArray.indexOf(entity));">
+                <button class="detail-icon" (click)="viewdiv(idList + entityArray.indexOf(entity), entity);">
                     <i class="material-icons">person</i>
                 </button>
                 <button class="edit-icon" (click)="viewdiv('edit' + idList + entityArray.indexOf(entity));">

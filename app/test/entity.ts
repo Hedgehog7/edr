@@ -6,18 +6,24 @@ export class EntityType {
     
     private _nameEntity: string = '';
     private _parentsEntities: EntityType[] = [];
-    private _parent: string[] = [];
+    // private _parent
+    private _parents: string[] = [];
     private _atributes: Atribute[] = [];
 
-    set nameEntity(newName: string) {
-        this._nameEntity = newName;
-    }
-
     get nameEntity(): string {
-        return this.constructor.name;
+        // this._nameEntity = this.constructor.name;
+        return this._nameEntity;
     }
 
-    get parent(): string[] {
+    set nameEntity(str: string) {
+        this._nameEntity = str;
+    }
+
+    public updateNameEntity() {
+        this._nameEntity = this.constructor.name;
+    }
+
+    get parents(): string[] {
         let obj = this;
         let typesNames: string[] = [];
         let typeName: string;
@@ -41,8 +47,12 @@ export class EntityType {
         return tempListAtributes;
     }
 
-    public addParent(newParent: EntityType) {
+    public addParentEntity(newParent: EntityType) {
         this._parentsEntities.push(newParent);
+    }
+
+    get parentsEntities(): EntityType[] {
+        return this._parentsEntities;
     }
 
     /**
@@ -99,7 +109,7 @@ export class EntityType {
      */
     public getComponentNameOfType(): string {
         let nameComponent: string;
-        for(let parentName of this.parent) {
+        for(let parentName of this.parents) {
             nameComponent = DICTIONARY.findComponent(parentName);
             if (nameComponent != null) {
                 return nameComponent;

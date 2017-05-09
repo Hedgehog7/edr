@@ -8,9 +8,6 @@ export class Olympiad extends EntityType {
                 public result: string,
                 public discipline: Discipline){
         super();
-    }
-
-    ngOnInit(){
-        this.nameEntity = this.getNameType(this);
+        this.updateNameEntity();
     }
 }

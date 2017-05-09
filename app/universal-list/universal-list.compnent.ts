@@ -38,7 +38,8 @@ export class UniversalListComponent {
         }
     }
 
-    viewdiv(id: string) {
+    viewdiv(id: string, obj: any) {
+        // console.log(obj);
         var el = document.getElementById(id);
         // console.log('' + this.idList + 'popup2');
         var popup = document.getElementById('' + this.idList + 'popup2');

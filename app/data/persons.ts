@@ -1,15 +1,12 @@
 import { EntityType } from '../test/entity';
 import { OnInit } from "@angular/core";
 
-export class Person extends EntityType implements OnInit{
+export class Person extends EntityType {
 
     constructor(public name: string,
                 public surname: string,
                 public age: number) {
-            super();       
-    }
-
-    ngOnInit(){
-        this.nameEntity = this.getNameType(this);
+            super();
+            this.updateNameEntity();       
     }
 }

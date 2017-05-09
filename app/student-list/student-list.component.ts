@@ -50,7 +50,8 @@ export class ListStudentComponent{
         }
     }
 
-    viewdiv(id: string) {
+    viewdiv(id: string, obj: any) {
+        // console.log(obj);
         var el = document.getElementById(id);
         var popup = document.getElementById("popup2");
         var overlay2 = document.getElementById("win2");

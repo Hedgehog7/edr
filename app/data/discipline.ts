@@ -6,9 +6,7 @@ export class Discipline extends EntityType {
         public fullName: string,
         public shortName: string){
         super();
+        this.updateNameEntity();
     }
 
-    ngOnInit(){
-        this.nameEntity = this.getNameType(this);
-    }
 }
