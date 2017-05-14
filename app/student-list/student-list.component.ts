@@ -1,7 +1,5 @@
 import { DataService } from '../services/data.service';
-import { Student } from '../data/students';
-import { STUDENTS } from '../data/data-test';
-import { Group } from '../data/group';
+import { Student, STUDENTS, Group } from '../data/all-test-data';
 import { Component, Input } from '@angular/core';
 
 

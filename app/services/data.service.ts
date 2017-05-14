@@ -1,8 +1,5 @@
-import { Person } from '../data/persons';
-import { Student } from '../data/students';
-import { Tutor } from '../data/tutor';
+import { Person, Student, Tutor, STUDENTS, SOMEPERSONS, TUTORS, PERSONANDSTUDENT } from '../data/all-test-data';
 import { EntityType } from '../test/entity';
-import { STUDENTS, SOMEPERSONS, TUTORS, PERSONANDSTUDENT } from '../data/data-test';
 import { Injectable } from '@angular/core';
 
 @Injectable()

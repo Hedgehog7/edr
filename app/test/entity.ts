@@ -1,14 +1,14 @@
 import { Atribute } from './atribute';
 import { RealationShip } from './realationship';
-import { DICTIONARY } from '../data/data-test';
+import { DICTIONARY } from '../data/all-test-data';
 
 export class EntityType {
     
     private _nameEntity: string = '';
     private _parentsEntities: EntityType[] = [];
-    // private _parent
     private _parents: string[] = [];
     private _atributes: Atribute[] = [];
+    private _realathionShip: RealationShip;
 
     get nameEntity(): string {
         // this._nameEntity = this.constructor.name;

@@ -1,6 +1,5 @@
 // import { SOMEPERSONS, STUDENTS} from '../data/students';
-import { SOMEPERSONS, STUDENTS} from '../data/data-test';
-import { Person } from '../data/persons';
+import { SOMEPERSONS, STUDENTS, Person} from '../data/all-test-data';
 import { EntityType } from '../test/entity';
 import { Component, Input } from '@angular/core';
 

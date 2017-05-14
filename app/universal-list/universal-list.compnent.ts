@@ -1,8 +1,7 @@
-import { SOMEPERSONS } from '../data/data-test';
+import { SOMEPERSONS, incrId } from '../data/all-test-data';
 import { DataService } from '../services/data.service';
 import { EntityType } from '../test/entity';
 import { Component, Input } from '@angular/core';
-import { incrId } from '../data/id-incr';
 
 @Component({
     moduleId: module.id,

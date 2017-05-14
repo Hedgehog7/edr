@@ -1,0 +1,98 @@
+<div *ngIf="!editMode">
+    <dx-data-grid
+        [dataSource]="valueTabs"
+        [allowColumnReordering]="true"
+        [allowColumnResizing]="true"
+        [columnAutoWidth]="true"
+        [rowAlternationEnabled]="false"
+        [hoverStateEnabled]="false">
+        <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false"></dxo-editing>
+        <div *ngFor="let elem of columnTabs">
+            <div *ngIf="elem.type == 'String' || elem.type == 'Number' || elem.type == 'Boolean'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="left"
+                    cellTemplate="cTempl"
+                    editCellTemplate="cTempl"
+                    aligment="center">
+                </dxi-column>
+            </div>
+            <div *dxTemplate="let data of 'cTempl'">
+                <dx-button
+                class="button-info"
+                icon="box"
+                [hoverStateEnabled]="false"
+                style="width:100%; border:0px; background: #fff;"
+                (onClick)="showInfo(data.value)"></dx-button>
+            </div>
+        </div>                
+    </dx-data-grid>
+</div>
+<div *ngIf="editMode">
+    <dx-data-grid 
+        [dataSource]="valueTabs"
+        [allowColumnReordering]="true"
+        [allowColumnResizing]="true"
+        [columnAutoWidth]="true"
+        [rowAlternationEnabled]="false"
+        [hoverStateEnabled]="false">
+        <dxo-editing mode="row" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true"></dxo-editing>
+        <div *ngFor="let elem of columnTabs">
+            <div *ngIf="elem.type == 'String'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                    <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type == 'Number'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                    <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                    <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type == 'Boolean'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                    <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="left"
+                    cellTemplate="cTempl"
+                    editCellTemplate="cTempl"
+                    aligment="center">
+                </dxi-column>
+            </div>
+            <div *dxTemplate="let data of 'cTempl'">
+                <dx-button
+                class="button-info"
+                icon="box"
+                [hoverStateEnabled]="false"
+                style="width:100%; border:0px; background: #fff;"
+                (onClick)="showInfo(data.value)"></dx-button>
+            </div>
+        </div>                
+    </dx-data-grid>
+</div>
+<dx-popup
+    class="popup"
+    style="overflow-y: scroll"
+    [showTitle]="true"
+    title="Information"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupVisible">
+    <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="false"></resolver>
+</dx-popup>

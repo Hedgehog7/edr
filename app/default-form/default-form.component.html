@@ -51,42 +51,12 @@
                 (onItemClick)="selectTab($event, 'View')"
             ></dx-tabs>
         </div>
-        <dx-data-grid *ngFor="let tab of arrAtributesCollection"
-                id="{{idObj+'gridContainerView'+tab}}"
-                [dataSource]="valueTabs[tab]"
-                [allowColumnReordering]="true"
-                [allowColumnResizing]="true"
-                [columnAutoWidth]="true"
-                [rowAlternationEnabled]="false"
-                [hoverStateEnabled]="false"
-                style="display:none">
-                <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false"></dxo-editing>
-                <div *ngFor="let elem of columnTabs[tab]">
-                    <div *ngIf="elem.type == 'String' || elem.type == 'Number' || elem.type == 'Boolean'">
-                        <dxi-column 
-                            dataField="{{elem.name}}"
-                            alignment="center">
-                        </dxi-column>
-                    </div>
-                    <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean'">
-                        <dxi-column 
-                            dataField="{{elem.name}}"
-                            alignment="left"
-                            cellTemplate="cTempl"
-                            editCellTemplate="cTempl"
-                            aligment="center">
-                        </dxi-column>
-                    </div>
-                    <div *dxTemplate="let data of 'cTempl'">
-                        <dx-button
-                        class="button-info"
-                        icon="box"
-                        [hoverStateEnabled]="false"
-                        style="width:100%; border:0px; background: #fff;"
-                        (onClick)="showInfo(data.value)"></dx-button>
-                    </div>
-                </div>                
-        </dx-data-grid>
+        <datagrid-custom 
+            *ngFor="let tab of arrAtributesCollection" 
+            id="{{idObj+'gridContainerView'+tab}}"
+            [dataCollection]="entity[tab]" 
+            [editMode]="editMode"
+            style="display:none"></datagrid-custom>
     </div>
     <div *ngIf="editMode==true">
         <form action="your-action" (submit)="onFormSubmit($event)" >            
@@ -155,8 +125,6 @@
             [(visible)]="popupVisible">
             <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="true"></resolver>
         </dx-popup>
-
-        
         <div id="{{idObj + 'longtabsEdit'}}">
             <div class="caption">Tabs attribute-collection</div>
             <dx-tabs 
@@ -167,57 +135,11 @@
                 (onItemClick)="selectTab($event, 'Edit')"
             ></dx-tabs>
         </div>            
-        <dx-data-grid *ngFor="let tab of arrAtributesCollection"
-                id="{{idObj+'gridContainerEdit'+tab}}"
-                [dataSource]="valueTabs[tab]"
-                [allowColumnReordering]="true"
-                [allowColumnResizing]="true"
-                [columnAutoWidth]="true"
-                [rowAlternationEnabled]="false"
-                [hoverStateEnabled]="false"
-                style="display:none">
-                <dxo-editing mode="row" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true"></dxo-editing>
-                <div *ngFor="let elem of columnTabs[tab]">
-                    <div *ngIf="elem.type == 'String'">
-                        <dxi-column 
-                            dataField="{{elem.name}}"
-                            alignment="center">
-                            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
-                        </dxi-column>
-                    </div>
-                    <div *ngIf="elem.type == 'Number'">
-                        <dxi-column 
-                            dataField="{{elem.name}}"
-                            alignment="center">
-                            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
-                            <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
-                        </dxi-column>
-                    </div>
-                    <div *ngIf="elem.type == 'Boolean'">
-                        <dxi-column 
-                            dataField="{{elem.name}}"
-                            alignment="center">
-                            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
-                        </dxi-column>
-                    </div>
-                    <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean'">
-                        <dxi-column 
-                            dataField="{{elem.name}}"
-                            alignment="left"
-                            cellTemplate="cTempl"
-                            editCellTemplate="cTempl"
-                            aligment="center">
-                        </dxi-column>
-                    </div>
-                    <div *dxTemplate="let data of 'cTempl'">
-                        <dx-button
-                        class="button-info"
-                        icon="box"
-                        [hoverStateEnabled]="false"
-                        style="width:100%; border:0px; background: #fff;"
-                        (onClick)="showInfo(data.value)"></dx-button>
-                    </div>
-                </div>                
-        </dx-data-grid>
+        <datagrid-custom 
+            *ngFor="let tab of arrAtributesCollection" 
+            id="{{idObj+'gridContainerEdit'+tab}}"
+            [dataCollection]="entity[tab]" 
+            [editMode]="editMode"
+            style="display:none"></datagrid-custom>
     </div>
 </section>

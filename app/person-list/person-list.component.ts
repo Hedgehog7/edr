@@ -1,8 +1,7 @@
 import { DataService } from '../services/data.service';
 import { Component, Input } from '@angular/core';
 
-import { Person } from '../data/persons';
-import { STUDENTS, SOMEPERSONS } from '../data/data-test';
+import { Person, STUDENTS, SOMEPERSONS } from '../data/all-test-data';
 
 @Component({
     moduleId: module.id,

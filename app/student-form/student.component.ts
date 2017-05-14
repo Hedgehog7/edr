@@ -1,6 +1,5 @@
-import { STUDENTS } from '../data/data-test';
+import { STUDENTS, Student } from '../data/all-test-data';
 import { Component, Input, OnInit } from '@angular/core';
-import { Student } from '../data/students';
 import { PersonComponent } from '../person-form/person.component';
 import { DataService } from '../services/data.service';
 

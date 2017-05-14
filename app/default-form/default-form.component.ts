@@ -1,11 +1,8 @@
-import { STUDENTS } from '../data/data-test';
+import { STUDENTS, incrId, Column } from '../data/all-test-data';
 import { EntityType } from '../test/entity';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-// import { SOMEPERSONS } from '../data/data-test';
-import { incrId } from '../data/id-incr';
 import { DataService } from '../services/data.service';
-import { Column } from '../data/column'; 
 
 import notify from 'devextreme/ui/notify';
 
@@ -20,57 +17,16 @@ export class DefaultFormComponent implements OnInit{
     @Input() entity: EntityType;
     @Input() editMode: boolean = false;
     idObj: string = incrId().toString();
-
     // атрибуты-коллекции для entity
     arrAtributesCollection: string[] = [];
-    // столбцы для атрибутов-коллекций
-    columnTabs: {[nameColumn: string] : Column[]} = {};
-    //
-    valueTabs: {[nameColumn: string] : any[]} = {};
-
-    // model: EntityType = new EntityType();
-
     popupVisible = false;
     currentEntity: any;
 
     ngOnInit(){
-        // получить список аттрибутов-коллекций
         this.arrAtributesCollection = this.entity.getArrayAtribute();
-        // console.log(this.entity);
-        
-        // для кажого атрибута-коллекции определяем его набор столбцов
-        // в соответствии с типом
-        // console.log(this.entity.nameEntity);
-        for(let attr of this.arrAtributesCollection) {
-                if(this.entity[attr].length != 0) {
-                    let type = this.entity.getNameType(this.entity[attr][0]);
-                    if(type == ("Number" || "String" || "Boolean")) {
-                        this.columnTabs[attr] = [new Column ("Value", type)];
-                        let arr: any[] = [];
-                        for(let elem of this.entity[attr])
-                            arr.push({"Value": elem});
-                        this.valueTabs[attr] = arr;
-                    } else {
-                        // массив имен колонок
-                        let arr = Object.getOwnPropertyNames(this.entity[attr][0]);
-                        // массив объектов колонок
-                        let m: Column[] = [];
-                        for(let el of arr)
-                            if(this.entity.getEntityNamesAttr().indexOf(el)==-1)
-                                m.push(new Column(el, this.entity.getNameType(this.entity[attr][0][el])));
-                        this.columnTabs[attr] = m;
-                        this.valueTabs[attr] = this.entity[attr];
-                    }
-                } else {
-                    this.valueTabs[attr] = this.entity[attr];
-                }           
-        }
-        
     }
 
     showInfo(entityEx: EntityType) {
-        // console.log(entityEx);
-        // console.log(entityEx.getAtributesNames());
         this.currentEntity = entityEx;
         this.popupVisible = true;
     }

@@ -1,8 +1,5 @@
-import { Tutor } from '../data/tutor';
+import { Tutor, Person, DICTIONARY, Student } from '../data/all-test-data';
 import { EntityType } from '../test/entity';
-import { Person } from '../data/persons';
-import { DICTIONARY } from '../data/data-test';
-import { Student } from '../data/students';
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 

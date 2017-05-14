@@ -1,4 +1,4 @@
-import { Tutor } from '../data/tutor';
+import { Tutor } from '../data/all-test-data';
 import { Component, Input } from '@angular/core';
 
 

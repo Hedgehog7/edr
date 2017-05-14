@@ -1,6 +1,5 @@
-import { DICTIONARY } from '../data/data-test';
+import { DICTIONARY, Dictionary, RecordDictionary } from '../data/all-test-data';
 import { Component } from '@angular/core';
-import { Dictionary, RecordDictionary } from '../data/dictionary'
 
 @Component({
     moduleId: module.id,
