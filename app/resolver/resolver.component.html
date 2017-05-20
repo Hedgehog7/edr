@@ -11,4 +11,7 @@
     <div *ngIf="entity.getComponentNameOfType() == 'TutorComponent'">
         <tutor [tutor]="entity"></tutor>
     </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'DatagridComponent'">
+        <datagrid-custom [dataCollection]="entity.getValues()"></datagrid-custom>
+    </div>
 </div>

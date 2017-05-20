@@ -19,11 +19,13 @@ export class DefaultFormComponent implements OnInit{
     idObj: string = incrId().toString();
     // атрибуты-коллекции для entity
     arrAtributesCollection: string[] = [];
-    popupVisible = false;
+    popupVisible: boolean = false;
     currentEntity: any;
 
     ngOnInit(){
         this.arrAtributesCollection = this.entity.getArrayAtribute();
+        // this.arrAtributesCollection = this.entity.getNewArrayAtribute();
+        // this.entity.getNewArrayAtribute();
     }
 
     showInfo(entityEx: EntityType) {

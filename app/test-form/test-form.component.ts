@@ -1,5 +1,6 @@
 import { Tutor, Person, DICTIONARY, Student } from '../data/all-test-data';
 import { EntityType } from '../test/entity';
+import { EntityList } from '../test/list-entity';
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 
@@ -15,20 +16,18 @@ export class TestTabsComponent {
     persons: Person[];
     tutors: Tutor[];
     variousTypes: EntityType[];
+    sd: EntityList<any>;
 
     constructor(private dataService: DataService) {
         this.persons = this.dataService.getPersons();
         this.students = this.dataService.getStudents();
         this.tutors = this.dataService.getTutors();
         this.variousTypes = this.dataService.getVariousTypes();
+        this.sd = new EntityList<any>();
+        this.sd.setValues(this.dataService.getStudents());
     }
 
-    ngOnInit() {
-        // this.persons = this.dataService.getPersons();
-        // this.students = this.dataService.getStudents();
-        // this.tutors = this.dataService.getTutors();
-        // this.variousTypes = this.dataService.getVariousTypes();
-    }
+    ngOnInit() {}
 }
 
 var json = 

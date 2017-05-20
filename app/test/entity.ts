@@ -1,14 +1,14 @@
 import { Atribute } from './atribute';
 import { RealationShip } from './realationship';
+import { EntityList } from './list-entity';
 import { DICTIONARY } from '../data/all-test-data';
 
 export class EntityType {
     
     private _nameEntity: string = '';
     private _parentsEntities: EntityType[] = [];
-    private _parents: string[] = [];
     private _atributes: Atribute[] = [];
-    private _realathionShip: RealationShip;
+    private _realathionShips: RealationShip[];
 
     get nameEntity(): string {
         // this._nameEntity = this.constructor.name;
@@ -101,6 +101,15 @@ export class EntityType {
             if(this.getNameType(this[atribute]) == 'Array' && entityProp.indexOf(atribute)==-1)
                 arr.push(atribute);
         }
+        return arr;
+    }
+
+    public getNewArrayAtribute(): string[]{
+        let arr: string[] = [];
+        for(let atribute of this.getAtributesNames())
+            if(this.getNameType(this[atribute]) == 'EntityList')
+                arr.push(atribute);
+        // console.log(arr);
         return arr;
     }
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Column } from '../data/all-test-data';
-import { EntityType } from '../test/entity'; 
+import { EntityType } from '../test/entity';
+import { EntityList } from '../test/list-entity'
 
 @Component({
     moduleId: module.id,
@@ -10,7 +11,7 @@ import { EntityType } from '../test/entity';
 })
 export class DatagridComponent implements OnInit{
     @Input() dataCollection: any[];
-    @Input() editMode: boolean;
+    @Input() editMode: boolean = false;
     columnTabs: Column[] = [];
     valueTabs: any[] = [];
     entity: EntityType = new EntityType();
@@ -41,7 +42,7 @@ export class DatagridComponent implements OnInit{
             }
         } else {
             this.valueTabs = this.dataCollection;
-        } 
+        }
     }
 
     showInfo(entityEx: EntityType) {
