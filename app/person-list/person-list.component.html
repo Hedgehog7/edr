@@ -1,3 +1,15 @@
 <div class="person-list" *ngIf="persons.length > 0">
-    <person *ngFor="let person of persons" [person]="person"></person>
+    <span>СПИСОК ПЕРСОН</span>
+    <!--<person *ngFor="let person of persons" [person]="person"></person>-->
+    <div *ngFor="let person of persons" class="person">
+        <span class="title">
+            {{'NAME: ' + person.name}}
+        </span>
+        <span class="title">
+            {{'SURNAME: ' + person.surname}}
+        </span>
+        <span class="title">
+            {{'AGE: ' + person.age }}
+        </span>
+    </div>
 </div>

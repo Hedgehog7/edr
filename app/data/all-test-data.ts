@@ -108,6 +108,7 @@ export class Student extends Person {
                 public studentGroup: Group,
                 public age: number = 0,
                 public disciplines: Discipline[],
+                // public olympiads: EntityList<Olympiad>,
                 public olympiads: Olympiad[],
                 public something: number[]
                 ){
@@ -149,7 +150,7 @@ OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по ф
 OLYMPIADS.push(new Olympiad('Межвузовская олимпиада по математике', 2015, 'Участник', new Discipline('Mathematical analysis','Math.an.')));
 export const OLYMPIADS2:  Array<Olympiad> = [];
 export const OLYMPIADS3: EntityList<Olympiad> = new EntityList<Olympiad>();
-// OLYMPIADS3.values = OLYMPIADS;
+OLYMPIADS3.setValues(OLYMPIADS);
 
 export const GROUPS: Group[] = [];
 const testGroup: Group = new Group('Б13-507', 2012, 'Программная инженерия');

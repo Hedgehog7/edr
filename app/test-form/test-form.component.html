@@ -1,6 +1,6 @@
 <!--<default-form></default-form>-->
 <div class="korpus">
-  <input type="radio" name="odin" checked="checked" id="vkl1"/>
+  <!--<input type="radio" name="odin" checked="checked" id="vkl1"/>
   <label for="vkl1">Student list</label>
 
   <input type="radio" name="odin" id="vkl2"/>
@@ -24,6 +24,12 @@
   </div>
   <div>
     <universal-list [entityArray]="variousTypes"></universal-list>
-  </div>
-  <resolver [entity]="sd"></resolver>
+  </div>-->
+
+  
+  <student-list [students]="students"></student-list>
+  
+  <person-list [persons]="students"></person-list>
+  <datagrid-custom [dataCollection]="students"></datagrid-custom>
+  <!--<resolver [entity]="sd"></resolver>-->
 </div>

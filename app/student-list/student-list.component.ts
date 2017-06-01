@@ -1,6 +1,7 @@
 import { DataService } from '../services/data.service';
-import { Student, STUDENTS, Group } from '../data/all-test-data';
+import { Student, STUDENTS, Group, Olympiad } from '../data/all-test-data';
 import { Component, Input } from '@angular/core';
+import { EntityList } from '../test/list-entity';
 
 
 @Component({
@@ -16,12 +17,12 @@ export class ListStudentComponent{
     constructor(private dataService: DataService) {}
 
     ngOnInit() {
-        this.newStudent = new Student('','','', 0, 0, new Group('', 0,''), 0,[],[],[]);
+        this.newStudent = new Student('','','', 0, 0, new Group('', 0,''), 0,[], [],[]);
     }
 
     updateNewStudent() {
-        this.newStudent = new Student('','','', 0, 0, new Group('', 0,''), 0,[],[],[]);
-        // this.newStudent = new Student(null,null,null,null,null,null,null, null, null, null);
+        // this.newStudent = new Student('','','', 0, 0, new Group('', 0,''), 0,[],new EntityList<Olympiad>(),[]);
+        this.newStudent = new Student(null,null,null,null,null,null,null, null, null, null);
     }
 
     delete(student: Student) {

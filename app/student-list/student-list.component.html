@@ -1,9 +1,10 @@
-<button class="btn" (click)="viewdiv('add-new');updateNewStudent();">Новый студент</button>
+<span class="main-title">СПИСОК СТУДЕНТОВ</span>
+<!--<button class="btn" (click)="viewdiv('add-new');updateNewStudent();">Новый студент</button>-->
 
 <!--<dx-button (onClick)="popupNewEntity()"></dx-button>-->
 
 <div *ngIf="students.length" >
-    <div *ngFor="let student of students" class="students" >
+    <div *ngFor="let student of students" class="students">
         <div class="student">
             <span class="title">
                 {{ student.name + ' ' + student.surname.charAt(0) + '.' + student.patronymic.charAt(0) + '.,' }}
