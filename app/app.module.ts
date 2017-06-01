@@ -20,6 +20,7 @@ import { DictionaryComponent } from './dictionary/dictionary.component';
 import { UniversalListComponent } from './universal-list/universal-list.compnent';
 import { TutorComponent } from './tutor-form/tutor.component';
 import { DatagridComponent } from './datagrid-form/datagrid-form.component'
+import { ResolverComponentCollections } from './resolver-collections/resolver-collections.component';
 
 import { DataService } from './services/data.service';
 
@@ -83,7 +84,8 @@ import { DxPopupModule,
         DictionaryComponent,
         UniversalListComponent,
         TutorComponent,
-        DatagridComponent
+        DatagridComponent,
+        ResolverComponentCollections
     ],
     providers: [DataService],
     /**
