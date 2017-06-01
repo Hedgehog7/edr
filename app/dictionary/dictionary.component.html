@@ -22,4 +22,24 @@
         <input name="nameComponent" placeholder="Имя компонента"  [(ngModel)]="newRecord.nameComponent" required />
         <input type="button" class="button-add" value="Добавить" (click)="addNewRecord(newRecord);"/>
     </div>
+    <table id="myTable2" class="dictionary" >
+        <caption></caption>
+        <tr>
+            <th>Collection</th>
+            <th>Entity</th>
+            <th>Component</th>
+        </tr>
+        <tr *ngFor="let record of dictionaryColl.getRecords()">
+            <td>{{ record.nameCollection }}</td>
+            <td>{{ record.nameEntity }}</td>
+            <td>
+                <div>
+                    {{ record.nameComponent }}
+                    <button class="delete-icon" (click)="deleteRecColl(record)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>

@@ -1,14 +1,11 @@
 <div>
-    <div *ngIf="collection[0].getComponentNameOfType() == 'default'">
+    <div *ngIf="getNameComponent() == 'default'">
         <datagrid-custom [dataCollection]="collection"></datagrid-custom>
     </div>
-    <div *ngIf="collection[0].getComponentNameOfType() == 'PersonComponent'">
+    <div *ngIf="getNameComponent() == 'PersonList'">
         <person-list [persons]="collection"></person-list>
     </div>
-    <div *ngIf="collection[0].getComponentNameOfType() == 'StudentComponent'">
+    <div *ngIf="getNameComponent() == 'StudentList'">
         <student-list [students]="collection"></student-list>
-    </div>
-    <div *ngIf="collection[0].getComponentNameOfType() == 'TutorComponent'">
-        tutor list
     </div>
 </div>

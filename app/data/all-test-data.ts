@@ -194,7 +194,7 @@ export const DICTIONARY: Dictionary = new Dictionary();
 DICTIONARY.pushNewRecord(new RecordDictionary('Student','StudentComponent'));
 DICTIONARY.pushNewRecord(new RecordDictionary('Person','PersonComponent'));
 DICTIONARY.pushNewRecord(new RecordDictionary('Tutor','TutorComponent'));
-DICTIONARY.pushNewRecord(new RecordDictionary('EntityList','DatagridComponent'));
+// DICTIONARY.pushNewRecord(new RecordDictionary('EntityList','DatagridComponent'));
 
 
 export class DictionaryCollections {
@@ -204,34 +204,37 @@ export class DictionaryCollections {
         return this.records;
     }
 
-    findComponent(nameEntity: string): string {
+    findComponent(nameCollection: string, nameEntity: string): string {
         for(let record of this.records) {
-            if(record.nameEntity == nameEntity) {
+            if(record.nameEntity == nameEntity && record.nameCollection == nameCollection) {
                 return record.nameComponent;
             }
         }
-        return null;
+        return 'default';
     }
 
     getNamesEntity(): string[] {
         let names: string[] = [];
-        for(let record of this.records) {
+        for(let record of this.records)
             names.push(record.nameEntity);
-        }
         return names;
     }
 
-    pushNewRecord(record: RecordDictionary) {
+    pushNewRecord(record: RecordDictionaryColleactions) {
         this.records.push(record);
     }
 }
 
 export class RecordDictionaryColleactions {
-    // nameEntity: string;
-    // nameComponent: string;
-    constructor(public nameEntity: string, 
+
+    constructor(public nameCollection: string,
+                public nameEntity: string, 
                 public nameComponent: string) {}
 }
+
+export const DICTIONARYCOLL: DictionaryCollections = new DictionaryCollections();
+DICTIONARYCOLL.pushNewRecord(new RecordDictionaryColleactions('Array','Student','StudentList'));
+DICTIONARYCOLL.pushNewRecord(new RecordDictionaryColleactions('Array','Person','PersonList'));
 
 let ID: number = 0;
 

@@ -1,13 +1,8 @@
 import { EntityType } from '../test/entity';
 
-export class EntityList<T> extends EntityType {
+export class EntityList<T> {
 
     private _values: Array<T>;
-
-    constructor(){
-        super();
-        this.updateNameEntity();
-    }
 
     public setValues(arg: Array<T>) {
         this._values = arg;
