@@ -132,6 +132,15 @@ export class Tutor extends Person {
     }
 }
 
+export class Citizen extends Person {
+    constructor(public name: string,
+                public surname: string,
+                public age: number,
+                public numPassport: number) {
+        super('','', 20);
+    }
+}
+
 /**
  * Тестовые данные
  */
