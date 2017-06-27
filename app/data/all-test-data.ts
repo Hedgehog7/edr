@@ -63,7 +63,6 @@ export class Discipline extends EntityType {
         super();
         this.updateNameEntity();
     }
-
 }
 
 export class Group extends EntityType {
@@ -74,7 +73,6 @@ export class Group extends EntityType {
         super();
         this.updateNameEntity();
     }
-
 }
 
 export class Olympiad extends EntityType {

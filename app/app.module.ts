@@ -24,10 +24,6 @@ import { ResolverComponentCollections } from './resolver-collections/resolver-co
 
 import { DataService } from './services/data.service';
 
-// import { NglModule } from 'ng-lightning/ng-lightning';
-
-// import { DemoDatatables } from './datatable/datatable.component';
-
 import { DxPopupModule,
         DxButtonModule, 
         DxDataGridModule, 
