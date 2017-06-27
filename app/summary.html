@@ -1,0 +1,520 @@
+<div *ngIf="!editMode">
+    <dx-data-grid
+        [dataSource]="valueTabs"
+        [allowColumnReordering]="true"
+        [allowColumnResizing]="true"
+        [columnAutoWidth]="true"
+        [rowAlternationEnabled]="false"
+        [hoverStateEnabled]="false">
+        <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false"></dxo-editing>
+        <div *ngFor="let elem of columnTabs">
+            <div *ngIf="elem.type == 'String' || elem.type == 'Number' || elem.type == 'Boolean'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean' && elem.type != 'Array'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="left"
+                    cellTemplate="cTempl"
+                    editCellTemplate="cTempl"
+                    aligment="center">
+                </dxi-column>
+            </div>
+            <div *dxTemplate="let data of 'cTempl'">
+                <dx-button
+                class="button-info"
+                icon="box"
+                [hoverStateEnabled]="false"
+                style="width:100%; border:0px; background: #fff;"
+                (onClick)="showInfo(data.value)"></dx-button>
+            </div>
+        </div>                
+    </dx-data-grid>
+</div>
+<div *ngIf="editMode">
+    <dx-data-grid 
+        [dataSource]="valueTabs"
+        [allowColumnReordering]="true"
+        [allowColumnResizing]="true"
+        [columnAutoWidth]="true"
+        [rowAlternationEnabled]="false"
+        [hoverStateEnabled]="false">
+        <dxo-editing mode="row" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true"></dxo-editing>
+        <div *ngFor="let elem of columnTabs">
+            <div *ngIf="elem.type == 'String'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                    <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type == 'Number'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                    <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                    <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type == 'Boolean'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="center">
+                    <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+                </dxi-column>
+            </div>
+            <div *ngIf="elem.type != 'String' && elem.type != 'Number' && elem.type != 'Boolean' && elem.type != 'Array'">
+                <dxi-column 
+                    dataField="{{elem.name}}"
+                    alignment="left"
+                    cellTemplate="cTempl"
+                    editCellTemplate="cTempl"
+                    aligment="center">
+                </dxi-column>
+            </div>
+            <div *dxTemplate="let data of 'cTempl'">
+                <dx-button
+                class="button-info"
+                icon="box"
+                [hoverStateEnabled]="false"
+                style="width:100%; border:0px; background: #fff;"
+                (onClick)="showInfo(data.value)"></dx-button>
+            </div>
+        </div>                
+    </dx-data-grid>
+</div>
+<dx-popup
+    class="popup"
+    style="overflow-y: scroll"
+    [showTitle]="true"
+    title="Information"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [(visible)]="popupVisible">
+    <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="false"></resolver>
+</dx-popup>
+<section *ngIf="getLengthNamesAttrEntity() > 0">
+    <!-- Режим просмотра -->
+    <div *ngIf="editMode==false">
+		<div class="table">	
+			<caption>Универсальная форма({{entity.nameEntity}})</caption>
+			<div class="header">
+				<div class="col">Имя атрибута</div><div class="col">Значение</div><div class="col">Тип</div>
+			</div>		
+			<div class="row" *ngFor="let atribute of entity.getAtributesNames()">
+				<div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col">
+                    {{atribute}}
+                </div>
+                <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col">
+                    <div *ngIf="entity.getNameType(entity[atribute]) == 'String' || 
+                                entity.getNameType(entity[atribute]) == 'Number' ||
+                                entity.getNameType(entity[atribute]) == 'Boolean'">
+                        {{entity[atribute]}}
+                    </div>
+                    <dx-button
+                        *ngIf="entity.getNameType(entity[atribute]) != 'Number' &&
+                        entity.getNameType(entity[atribute]) != 'String'&&
+                        entity.getNameType(entity[atribute]) != 'Boolean'&&
+                        entity.getNameType(entity[atribute]) != 'Array'"
+                        class="button-info"
+                        text="..."
+                        (onClick)="showInfo(entity[atribute])">
+                    </dx-button>
+                </div>
+                <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col">
+                    {{entity.getNameType(entity[atribute])}}
+                </div>
+			</div>
+            <dx-popup
+                class="popup"
+                style="overflow-y: scroll"
+                [showTitle]="true"
+                title="Information"
+                [dragEnabled]="false"
+                [closeOnOutsideClick]="true"
+                [(visible)]="popupVisible">
+                <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="false"></resolver>
+            </dx-popup>
+		</div>
+        <div id="{{idObj + 'longtabsView'}}">
+            <div class="caption">Tabs attribute-collection</div>
+            <dx-tabs 
+                class="tabs"
+                [dataSource]="arrAtributesCollection"
+                [scrollByContent]="true"
+                [showNavButtons]="true"
+                (onItemClick)="selectTab($event, 'View')"
+            ></dx-tabs>
+        </div>
+        <datagrid-custom 
+            *ngFor="let tab of arrAtributesCollection" 
+            id="{{idObj+'gridContainerView'+tab}}"
+            [dataCollection]="entity[tab]" 
+            [editMode]="editMode"
+            style="display:none"></datagrid-custom>
+    </div>
+    <div *ngIf="editMode==true">
+        <form action="your-action" (submit)="onFormSubmit($event)" >            
+            <div class="table">
+                <caption>Универсальная форма({{entity.nameEntity}})</caption>
+                <div class="header">
+                    <div class="col">Имя атрибута</div><div class="col">Значение</div><div class="col">Тип</div>
+                </div>
+                <div class="row" *ngFor="let atribute of entity.getAtributesNames()">
+                    <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >{{atribute}}</div>
+                    <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >
+                        <dx-text-box
+                            *ngIf="entity.getNameType(entity[atribute]) == 'String'"
+                            [(ngModel)]="entity[atribute]" name="{{atribute+idObj}}">
+                            <dx-validator [validationGroup]="idObj+vGr">
+                                <dxi-validation-rule type="required" message="required {{atribute}}"></dxi-validation-rule>
+                            </dx-validator>
+                        </dx-text-box>
+                        <dx-number-box 
+                            *ngIf="entity.getNameType(entity[atribute]) == 'Number'"
+                            [(ngModel)]="entity[atribute]" name="{{atribute+idObj}}">
+                            <dx-validator [validationGroup]="idObj+vGr">
+                                <dxi-validation-rule type="required" message="required {{atribute}}"></dxi-validation-rule>
+                                <dxi-validation-rule type="range" [min]=0></dxi-validation-rule>
+                            </dx-validator>
+                        </dx-number-box>
+                        <dx-check-box
+                            *ngIf="entity.getNameType(entity[atribute]) == 'Boolean'"
+                            [(ngModel)]="entity[atribute]" name="{{atribute+idObj}}">
+                            <dx-validator [validationGroup]="idObj+vGr">
+                                <dxi-validation-rule  type="required" message="required {{atribute}}"></dxi-validation-rule>
+                            </dx-validator>
+                        </dx-check-box>
+                        <dx-button
+                            *ngIf="entity.getNameType(entity[atribute]) != 'Number' &&
+                            entity.getNameType(entity[atribute]) != 'String' &&
+                            entity.getNameType(entity[atribute]) != 'Boolean' &&
+                            entity.getNameType(entity[atribute]) != 'Array'"
+                            class="button-info"
+                            text="..."
+                            (onClick)="showInfo(entity[atribute])">
+                        </dx-button>
+                    </div>
+                    <div *ngIf="entity.getNameType(entity[atribute]) != 'Array'" class="col" >
+                        {{entity.getNameType(entity[atribute])}}
+                    </div>
+                </div>
+            </div>
+            <dx-validation-summary [validationGroup]="idObj+vGr" id="{{'summary' + idObj}}"></dx-validation-summary>
+            <dx-button 
+                id="button + {{idObj}}"
+                text="Сохранить"
+                type="success"  
+                [validationGroup]="idObj+vGr"
+                [useSubmitBehavior]="true"
+                style="width:100%">
+            </dx-button>
+        </form>
+        <dx-popup
+            class="popup"
+            style="overflow-y: scroll"
+            [showTitle]="true"
+            title="Information"
+            [dragEnabled]="false"
+            [closeOnOutsideClick]="true"
+            [(visible)]="popupVisible">
+            <resolver *dxTemplate="let data of 'content'" [entity]="currentEntity" [editMode]="true"></resolver>
+        </dx-popup>
+        <div id="{{idObj + 'longtabsEdit'}}">
+            <div class="caption">Tabs attribute-collection</div>
+            <dx-tabs 
+                class="tabs"
+                [dataSource]="arrAtributesCollection"
+                [scrollByContent]="true"
+                [showNavButtons]="true"
+                (onItemClick)="selectTab($event, 'Edit')"
+            ></dx-tabs>
+        </div>            
+        <datagrid-custom 
+            *ngFor="let tab of arrAtributesCollection" 
+            id="{{idObj+'gridContainerEdit'+tab}}"
+            [dataCollection]="entity[tab]" 
+            [editMode]="editMode"
+            style="display:none"></datagrid-custom>
+    </div>
+</section>
+<div>
+    <table id="myTable" class="dictionary" >
+        <caption></caption>
+        <tr>
+            <th>Entity</th>
+            <th>Component</th>
+        </tr>
+        <tr *ngFor="let record of exampleDictionary.getRecords()">
+            <td>{{ record.nameEntity }}</td>
+            <td>
+                <div>
+                    {{ record.nameComponent }}
+                    <button class="delete-icon" (click)="delete(record)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="form-input">
+        <input name="nameEntity" placeholder="Имя типа"  [(ngModel)]="newRecord.nameEntity" required />
+        <input name="nameComponent" placeholder="Имя компонента"  [(ngModel)]="newRecord.nameComponent" required />
+        <input type="button" class="button-add" value="Добавить" (click)="addNewRecord(newRecord);"/>
+    </div>
+    <table id="myTable2" class="dictionary" >
+        <caption></caption>
+        <tr>
+            <th>Collection</th>
+            <th>Entity</th>
+            <th>Component</th>
+        </tr>
+        <tr *ngFor="let record of dictionaryColl.getRecords()">
+            <td>{{ record.nameCollection }}</td>
+            <td>{{ record.nameEntity }}</td>
+            <td>
+                <div>
+                    {{ record.nameComponent }}
+                    <button class="delete-icon" (click)="deleteRecColl(record)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="group-item">
+	{{group.name}}{{group.yearStart}}{{group.specialization}}
+</div>
+<div class="person-item">
+    <span class="title">PERSON</span>
+    <div class="detail-person">
+        <div><span class="name">Имя: {{ person.name }}</span></div>
+        <div><span class="name">Фамилия: {{ person.surname }}</span></div>
+        <div><span class="name">Возраст: {{ person.age }}</span></div>
+    </div>
+</div>
+<div class="person-list" *ngIf="persons.length > 0">
+    <span>СПИСОК ПЕРСОН</span>
+    <!--<person *ngFor="let person of persons" [person]="person"></person>-->
+    <div *ngFor="let person of persons" class="person">
+        <span class="title">
+            {{'NAME: ' + person.name}}
+        </span>
+        <span class="title">
+            {{'SURNAME: ' + person.surname}}
+        </span>
+        <span class="title">
+            {{'AGE: ' + person.age }}
+        </span>
+    </div>
+</div>
+<div>
+    <div *ngIf="entity.getComponentNameOfType() == 'default'">
+        <default-form [entity]="entity" [editMode]="editMode"></default-form>
+    </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'PersonComponent'">
+        <person [person]="entity"></person>
+    </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'StudentComponent'">
+        <student [student]="entity"></student>
+    </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'TutorComponent'">
+        <tutor [tutor]="entity"></tutor>
+    </div>
+    <div *ngIf="entity.getComponentNameOfType() == 'DatagridComponent'">
+        <datagrid-custom [dataCollection]="entity.getValues()"></datagrid-custom>
+    </div>
+</div>
+<div>
+    <div *ngIf="getNameComponent() == 'default'">
+        <datagrid-custom [dataCollection]="collection"></datagrid-custom>
+    </div>
+    <div *ngIf="getNameComponent() == 'PersonList'">
+        <person-list [persons]="collection"></person-list>
+    </div>
+    <div *ngIf="getNameComponent() == 'StudentList'">
+        <student-list [students]="collection"></student-list>
+    </div>
+</div>
+<div class="student-form">
+    <div *ngIf="editMode==false">
+        <div>
+            <span class="title">STUDENT</span>
+        </div>
+        <div class="FIO"> 
+            <span class="nameShow">{{ student.name }}</span>
+            <span class="nameShow">{{ student.surname }}</span>
+            <span class="nameShow">{{ student.patronymic }}</span>
+        </div>
+        <div class="subInfo">
+            <span class="age">Номер зачётной книжки: {{ student.personalNumber }}</span>
+            <span class="numberDepartment">Кафедра: {{ student.numberDepartment }}</span>
+            <span class="age">Возраст: {{ student.age }}</span>
+            <span class="studentGroup">Группа: {{ student.studentGroup.name }}</span>
+        </div>
+    </div>
+    <div class="container" *ngIf="editMode==true">
+        <form #f="ngForm">
+            <div class="input-div">
+                <input name="name" placeholder="Укажите имя"  [(ngModel)]="student.name" 
+                        class="name" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="surname" placeholder="Укажите фамилию"  [(ngModel)]="student.surname"
+                        class="surname" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="patronymic" placeholder="Укажите отчество"  [(ngModel)]="student.patronymic" 
+                class="patronymic" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="personalNumber" placeholder="Укажите номер зачётки"  [(ngModel)]="student.personalNumber" 
+                class="personalNumber" type="number" required/>
+            </div>
+            <div class="input-div">
+                <input name="numberDepartment" placeholder="Укажите номер кафедры"  [(ngModel)]="student.numberDepartment" 
+                class="numberDepartment" type="number" required />
+            </div>
+            <div class="input-div">
+                <input name="studentGroup" placeholder="Укажите номер группы"  [(ngModel)]="student.studentGroup"
+                 class="studentGroup" required pattern="([A-Za-zА-Яа-яЁё])([0-9]{2})(-)([0-9]{3})"/>
+            </div>
+            <div class="input-div">
+                <input name="age"placeholder="Укажите возраст"  [(ngModel)]="student.age" class="age" type="number" required />
+            </div>
+            <button [disabled]="f.invalid" class="btn" (click)="addNewStudent()">Добавить</button>
+        </form>
+    </div>
+</div>
+<div class="student-form">
+    <div *ngIf="editMode==false">
+        <div>
+            <span class="title">STUDENT</span>
+        </div>
+        <div class="FIO"> 
+            <span class="nameShow">{{ student.name }}</span>
+            <span class="nameShow">{{ student.surname }}</span>
+            <span class="nameShow">{{ student.patronymic }}</span>
+        </div>
+        <div class="subInfo">
+            <span class="age">Номер зачётной книжки: {{ student.personalNumber }}</span>
+            <span class="numberDepartment">Кафедра: {{ student.numberDepartment }}</span>
+            <span class="age">Возраст: {{ student.age }}</span>
+            <span class="studentGroup">Группа: {{ student.studentGroup.name }}</span>
+        </div>
+    </div>
+    <div class="container" *ngIf="editMode==true">
+        <form #f="ngForm">
+            <div class="input-div">
+                <input name="name" placeholder="Укажите имя"  [(ngModel)]="student.name" 
+                        class="name" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="surname" placeholder="Укажите фамилию"  [(ngModel)]="student.surname"
+                        class="surname" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="patronymic" placeholder="Укажите отчество"  [(ngModel)]="student.patronymic" 
+                class="patronymic" required pattern="[A-Za-zА-Яа-яЁё]+"/>
+            </div>
+            <div class="input-div">
+                <input name="personalNumber" placeholder="Укажите номер зачётки"  [(ngModel)]="student.personalNumber" 
+                class="personalNumber" type="number" required/>
+            </div>
+            <div class="input-div">
+                <input name="numberDepartment" placeholder="Укажите номер кафедры"  [(ngModel)]="student.numberDepartment" 
+                class="numberDepartment" type="number" required />
+            </div>
+            <div class="input-div">
+                <input name="studentGroup" placeholder="Укажите номер группы"  [(ngModel)]="student.studentGroup"
+                 class="studentGroup" required pattern="([A-Za-zА-Яа-яЁё])([0-9]{2})(-)([0-9]{3})"/>
+            </div>
+            <div class="input-div">
+                <input name="age"placeholder="Укажите возраст"  [(ngModel)]="student.age" class="age" type="number" required />
+            </div>
+            <button [disabled]="f.invalid" class="btn" (click)="addNewStudent()">Добавить</button>
+        </form>
+    </div>
+</div>
+<!--<default-form></default-form>-->
+<div class="korpus">
+  <input type="radio" name="odin" checked="checked" id="vkl1"/>
+  <label for="vkl1">Student list</label>
+
+  <input type="radio" name="odin" id="vkl2"/>
+  <label for="vkl2">Person list</label>
+
+  <input type="radio" name="odin" id="vkl3"/>
+  <label for="vkl3">Tutors list</label>
+  
+  <input type="radio" name="odin" id="vkl4"/>
+  <label for="vkl4">Universal list</label>
+
+
+  <div>
+    <student-list [students]="students"></student-list>
+  </div>
+  <div>
+    <universal-list [entityArray]="persons"></universal-list>
+  </div>
+  <div>
+    <universal-list [entityArray]="tutors"></universal-list>
+  </div>
+  <div>
+    <universal-list [entityArray]="variousTypes"></universal-list>
+  </div>
+
+  <!---->
+  <!--Тест списков-->
+  <!---->
+  <!---->
+  <!--<student-list [students]="students"></student-list>
+  
+  <person-list [persons]="students"></person-list>
+
+  <datagrid-custom [dataCollection]="students"></datagrid-custom>-->
+  <!--<resolver [entity]="sd"></resolver>-->
+
+  <resolver-collections [collection]="students"></resolver-collections>
+</div>
+<div>
+    <div class="tutor-entity">TUTOR</div>
+    <div><span class="since-degree">Учёная степень: {{ tutor.scienceDegree }}</span></div>
+    <div class="main-info">
+        <span class="name-tutor">ФИО: {{ tutor.name }} </span>
+        <span class="name-tutor">{{ tutor.surname }} </span>
+        <span class="name-tutor">{{ tutor.patronymic }} </span>
+    </div>
+    <div class="sub-container">
+        <span class="sub">Стаж работы: {{ tutor.workExperience }} </span>
+        <span class="sub">Персональный номер: {{ tutor.personalNumber }} </span>
+        <span class="sub">Возраст: {{ tutor.age }} </span></div>
+</div>
+<div>
+    <div class="tutor-entity">TUTOR</div>
+    <div><span class="since-degree">Учёная степень: {{ tutor.scienceDegree }}</span></div>
+    <div class="main-info">
+        <span class="name-tutor">ФИО: {{ tutor.name }} </span>
+        <span class="name-tutor">{{ tutor.surname }} </span>
+        <span class="name-tutor">{{ tutor.patronymic }} </span>
+    </div>
+    <div class="sub-container">
+        <span class="sub">Стаж работы: {{ tutor.workExperience }} </span>
+        <span class="sub">Персональный номер: {{ tutor.personalNumber }} </span>
+        <span class="sub">Возраст: {{ tutor.age }} </span></div>
+</div>
+<main>
+    <!--<test></test>-->
+    <test-tabs></test-tabs>
+    <!--Кнопка для редактирования словаря-->
+    <a href="#win1" class="settings"><i class='medium material-icons'>settings</i></a>
+    <a href="#x" class="overlay" id="win1"></a>
+    <div class="popup">
+        <dictionary></dictionary> 
+        <a class="close"title="Закрыть" href="#close"></a>
+    </div>
+</main>
